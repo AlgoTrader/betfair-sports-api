@@ -23,11 +23,25 @@ function openSession(login, password)
     return session;
 }
 
-function closeSession(index)
+function closeSession(session)
 {
     var session = openSessions[index];
     session.close();
     return;
+}
+
+function closeAllSessions(session)
+{
+    for(var session in openSessions)
+    {
+        session.close();
+    }
+    return;
+}
+
+function numberOfSessions()
+{
+    return openSessions.length;
 }
 
 function getSession(index)
