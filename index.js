@@ -19,6 +19,9 @@ var openSessions = [];
 function openSession(login, password)
 {
     var session = betfairSession.newSession(login, password);
+    session.on("loggedIn", function() {
+       console.log("loggedIn");
+    });
     openSessions.push(session);
     return session;
 }
@@ -49,3 +52,4 @@ function getSession(index)
     var session = openSessions[index];
     return session;
 }
+
