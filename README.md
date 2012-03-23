@@ -1,7 +1,7 @@
 Betfair Sports API for Node
 ===========================
 
-*Warning: Please do not use, it is unusable yet*
+**Warning: Please do not use, it is unusable yet**
 
 Installation
 ------------
