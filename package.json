@@ -4,7 +4,7 @@
   "description": "Betfair Sports API for Node",
   "version": "0.0.1",
   "repository": {
-    "url": ""
+    "url": "https://github.com/BetfairTrader/betfair-sports-api"
   },
   "main": "index.js",
   "dependencies": { "libxmljs" : "*" },
