@@ -16,5 +16,5 @@ console.log(loginRequest);
 var login = betfairGlobalService.login(loginRequest);
 login.execute(function(resp) {
     console.log("login Response:");
-    console.log(resp);
+    console.log(resp.result);
 });
