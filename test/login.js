@@ -1,13 +1,16 @@
-var betfairUser = "user";
-var betfairPassword = "password";
+var fs = require('fs');
+var account = JSON.parse( fs.readFileSync("../account.json") );
+
+account.login    = account.login || "nobody";
+account.password = account.password || "password";
 
 var betfairGlobalService = require("../lib/betfair_global_service.js");
 
 var loginRequest = {
     locationId : "0",
-    password : betfairPassword,
+    password : account.password,
     productId : "82",
-    username : betfairUser,
+    username : account.login,
     vendorSoftwareId : "0"
 };
 console.log("login Request:");
