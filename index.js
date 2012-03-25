@@ -26,7 +26,7 @@ function openSession(login, password)
 function closeSession(session)
 {
     var session = openSessions[index];
-    session.close();
+    session.logout();
     return;
 }
 
