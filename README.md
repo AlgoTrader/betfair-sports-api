@@ -1,4 +1,4 @@
-Betfair Sports API for Node
+Betfair Sports API for Node.js
 ===========================
 
 **Warning: Please do not use, it is unusable yet**
