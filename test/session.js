@@ -3,7 +3,7 @@ var fs = require('fs');
 var util = require('util');
 var async = require('async')
 
-var account = JSON.parse(fs.readFileSync('../account.json'));
+var account = JSON.parse(fs.readFileSync('/etc/bf/account.json'));
 
 var keepAliveRequests = 30;
 https.globalAgent.maxSockets = 5;

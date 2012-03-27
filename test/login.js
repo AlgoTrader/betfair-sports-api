@@ -1,5 +1,5 @@
 var fs = require('fs');
-var account = JSON.parse(fs.readFileSync("../account.json"));
+var account = JSON.parse(fs.readFileSync("/etc/bf/account.json"));
 
 account.login = account.login || "nobody";
 account.password = account.password || "password";
