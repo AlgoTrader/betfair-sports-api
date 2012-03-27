@@ -7,7 +7,7 @@
     "url": "https://github.com/BetfairTrader/betfair-sports-api"
   },
   "main": "index.js",
-  "dependencies": { "libxmljs" : "*" },
+  "dependencies": { "libxmljs" : "*", "async" : "*" },
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
