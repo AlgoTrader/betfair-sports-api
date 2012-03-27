@@ -61,7 +61,7 @@ Example:
     
 ### BetfairSession class ###
 
-not yet written
+not yet written.
 
     
 
