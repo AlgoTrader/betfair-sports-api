@@ -4,7 +4,7 @@ var https = require('https');
 
 var account = JSON.parse(fs.readFileSync("../account.json"));
 
-https.globalAgent.maxSockets = 10;
+https.globalAgent.maxSockets = 5;
 
 account.login = account.login || "nobody";
 account.password = account.password || "password";
@@ -22,8 +22,9 @@ session.on("loggedIn", function(res) {
     var fastest = Infinity;
     var slowest = 0;
     var okCalls = 0;
+    var totalCalls = 0;
     console.log("got loggedIn event");
-    for ( var cnt = 0; cnt < 5; ++cnt) {
+    for ( var cnt = 0; cnt < 10; ++cnt) {
         session.keepAlive(function keepAliveResult(res) {
             console.log(res.result);
             if (res.duration() < fastest)
@@ -32,10 +33,13 @@ session.on("loggedIn", function(res) {
                 slowest = res.duration();
             if (res.result.header.errorCode === "OK")
                 ++okCalls;
-            if (okCalls === 5)
+            if (okCalls === 10)
+            {
                 console.log(util.format(
                         "Ok calls:%s fastest:%sms slowest:%sms", okCalls,
                         fastest, slowest));
+                        session.close();
+            }
         });
     }
     //session.close();
