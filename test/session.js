@@ -5,6 +5,7 @@ var async = require('async')
 
 var account = JSON.parse(fs.readFileSync('../account.json'));
 
+var keepAliveRequests = 30;
 https.globalAgent.maxSockets = 5;
 
 account.login = account.login || 'nobody';
@@ -14,58 +15,44 @@ var betfairSport = require('../index.js');
 var session = betfairSport.openSession(account.login, account.password);
 
 async.series({
-    // login
+    // Login to Betfair
     login : function(cb) {
-        console.log("logging in...");
+        console.log('Logging in to Betfair...');
         session.open(function onLoginFinished(err, res) {
             if (err) {
-                console.log("login error", err);
+                console.log('Login error', err);
                 process.exit(-1);
             }
-            console.log("login ok");
-            cb(err, res);
+            console.log('Logged in OK');
+            cb(null, "OK");
         });
     },
 
-    // send a number of keepAlive
+    // Send a number of keepAlive requests
     sendKeepAlives : function(cb) {
+        console.log('Send %s keepAlive requests', keepAliveRequests);
 
+        var keepAlives = [];
+        for ( var cnt = 0; cnt < keepAliveRequests; ++cnt)
+            keepAlives.push(session.keepAlive());
+
+        async.forEach(keepAlives, function(inv, cb) {
+            inv.execute(cb);
+        }, function() {
+            for ( var cnt = 0; cnt < keepAliveRequests; ++cnt)
+                console.log("keepAlive result:",
+                        keepAlives[cnt].isSuccess() ? 'OK' : 'Fail',
+                        "duration", keepAlives[cnt].duration()/1000);
+            cb(null, "OK");
+        });
     },
 
-    // logout from Betfair
+    // Logout from Betfair
     logout : function(cb) {
-
+        console.log('Logging out...');
+        session.close(function(err, res) {
+            console.log('Logged out OK');
+        });
+        cb(null, "OK");
     }
 });
-
-//session.on("loggedIn", function(res) {
-//    var fastest = Infinity;
-//    var slowest = 0;
-//    var okCalls = 0;
-//    var totalCalls = 0;
-//    console.log("got loggedIn event");
-//    for ( var cnt = 0; cnt < 10; ++cnt) {
-//        session.keepAlive(function keepAliveResult(res) {
-//            console.log(res.result);
-//            if (res.duration() < fastest)
-//                fastest = res.duration();
-//            if (res.duration() > slowest)
-//                slowest = res.duration();
-//            if (res.result.header.errorCode === "OK")
-//                ++okCalls;
-//            if (okCalls === 10)
-//            {
-//                console.log(util.format(
-//                        "Ok calls:%s fastest:%sms slowest:%sms", okCalls,
-//                        fastest, slowest));
-//                session.close();
-//            }
-//        });
-//    }
-//    // session.close();
-//});
-//
-//session.on("loggedOut", function(res) {
-//    console.log("got loggedOut event");
-//    process.exit(1);
-//});
