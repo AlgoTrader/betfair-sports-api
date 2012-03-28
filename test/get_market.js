@@ -52,7 +52,7 @@ async.series({
             cb(null, "OK");
         });
     },
-    
+
     // invoke getMarket on the single market
     getMarket : function(cb)
     {
