@@ -42,7 +42,7 @@ async.series({
             for ( var cnt = 0; cnt < keepAliveRequests; ++cnt)
                 console.log("keepAlive result:",
                         keepAlives[cnt].isSuccess() ? 'OK' : 'Fail',
-                        "duration", keepAlives[cnt].duration()/1000);
+                        "duration", keepAlives[cnt].duration() / 1000);
             cb(null, "OK");
         });
     },
