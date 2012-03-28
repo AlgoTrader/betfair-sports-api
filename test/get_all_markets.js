@@ -29,13 +29,26 @@ async.series({
 
     // invoke getAllMArkets at uk exchange for soccer
     getAllMarkets : function(cb) {
-        console.log('Get today\'s soccer matches');
+        console.log('Get available tennis matches');
 
-        // evIds, countries, fromDate, toDate
-        var inv = session.getAllMarkets([ 2 ] /* soccer */, undefined,
-                undefined, undefined);
+        // eventTypeIds 1-soccer, 2-tennis
+        var inv = session.getAllMarkets({
+            eventTypeIds : [ 2 ]
+        });
         inv.execute(function(err, res) {
-            console.log(err, res.result, 'duration', res.duration() / 1000);
+            console.log('action:', res.action, 'error:', err, 'duration:', res
+                    .duration() / 1000);
+            if (err) {
+                cb("Error in getAllMarkets", null);
+            }
+            for ( var index in res.result.marketData) {
+                market = res.result.marketData[index];
+                if (market.marketName != 'Match Odds')
+                    continue;
+                console
+                        .log(market.menuPath
+                                .replace(/\\Tennis\\Group A\\/g, ''));
+            }
             cb(null, "OK");
         });
     },
@@ -45,7 +58,7 @@ async.series({
         console.log('Logging out...');
         session.close(function(err, res) {
             console.log('Logged out OK');
+            cb(null, "OK");
         });
-        cb(null, "OK");
     }
 });
