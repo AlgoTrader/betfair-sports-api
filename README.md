@@ -39,10 +39,21 @@ API
 
 ### Betfair invocation support status ###
 
-<table>
-    <tr>
-        <th>API call</th>
-    </tr>
+<table cellspacing=1>
+    <tr><th>API call</th><th>Status</th></tr>
+    <tr><th colspan=2>Session management API calls</th></tr>
+    <tr><td>login</td><td><b>Done</b> (with limits)</td></tr>
+    <tr><td>logout</td><td><b>Done</b></td></tr>
+    <tr><td>keepAlive</td><td><b>Done</b></td></tr>
+    <tr><th colspan=2>Read-only API calls</th></tr>
+    <tr><td>convertCurrency</td><td>No Need</td></tr>
+    <tr><td>getActiveEventTypes</td><td>Not Done</td></tr>
+    <tr><td>getAllCurrencies</td><td>No Need</td></tr>
+    <tr><td>getAllCurrenciesV2</td><td>No Need</td></tr>
+    <tr><td>getAllEventTypes</td><td>Not Done</td></tr>
+    <tr><td>getAllMarkets</td><td><b>Done</b></td></tr>
+    <tr><td>getBet</td><td>Not Done</td></tr>
+    <tr><td>getBetHistory</td><td>Not Done</td></tr>
 </table>
 
 ### Session Management API ###
