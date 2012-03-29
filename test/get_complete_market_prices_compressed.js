@@ -53,23 +53,22 @@ async.series({
         });
     },
 
-    // invoke getMarketPircesCompressed on the single market
+    // invoke getCompleteMarketPircesCompressed on the single market
     getMarketPricesCompressed : function(cb) {
-        console.log('Call getMarketPricesCompressed for marketId="%s"',
+        console.log('Call getCompleteMarketPricesCompressed for marketId="%s"',
                 marketId);
-        var inv = session.getMarketPricesCompressed(marketId);
+        var inv = session.getCompleteMarketPricesCompressed(marketId);
         inv.execute(function(err, res) {
             console.log('action:', res.action, 'error:', err,
                     'duration:', res.duration() / 1000);
             if (err) {
-                cb("Error in getMarketPricesCompressed", null);
+                cb("Error in getCompleteMarketPricesCompressed", null);
             }
+
             //console.log(util.inspect(res.result, false, 10));
 
-            var market = res.result.marketPrices;
+            var market = res.result.completeMarketPrices;
             console.log("marketId:", market.marketId);
-            console.log("currency:", market.currency);
-            console.log("marketStatus:", market.marketStatus);
             console.log("inPlayDelay:", market.inPlayDelay);
             // print players info
             for ( var playerIndex = 0; playerIndex < market.runners.length; ++playerIndex) {
@@ -78,15 +77,10 @@ async.series({
                 console.log("\tselectionId:", runner.selectionId);
                 console.log("\tlastPriceMatched:", runner.lastPriceMatched);
                 console.log("\ttotalMatched:", runner.totalMatched);
-                for ( var cnt = 0; cnt < runner.backPrices.length; ++cnt) {
-                    var item = runner.backPrices[cnt];
-                    console.log("\t back price:%s amount:%s",
-                            item.price, item.amount);
-                }
-                for ( var cnt = 0; cnt < runner.layPrices.length; ++cnt) {
-                    var item = runner.layPrices[cnt];
-                    console.log("\t lay price:%s amount:%s",
-                            item.price, item.amount);
+                for(var priceIndex = 0; priceIndex< runner.prices.length; ++priceIndex) {
+                    var price = runner.prices[priceIndex];
+                    console.log("\t\tprice:%s backAmount:%s layAmount:%s", 
+                            price.price, price.backAmount, price.layAmount);
                 }
             }
             cb(null, "OK");
