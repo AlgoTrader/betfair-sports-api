@@ -26,31 +26,30 @@ An example of using Betfair Sports API
         username : betfairUser,
         vendorSoftwareId : "0"
     };
-    console.log("login Request:");
-    console.log(loginRequest);
+    console.log("login Request:%s",loginRequest);
     
     var login = betfairGlobalService.login(loginRequest);
-    login.execute(function(resp) {
-        console.log("login Response:");
-        console.log(resp);
+    login.execute(function(err, resp) {
+        console.log("login response:%s error:%s", resp.result, err);
     });
     
 
 API
 ---
 
+### Betfair invocation support status ###
+
+<table>
+    <tr>
+        <th>API call</th>
+    </tr>
+</table>
+
 ### Session Management API ###
 
 Session Management API is used to open, close and get objects of BetfairSession class. 
 There may be multiple sessions at the same time to Betfair using different Betfair accounts. 
 
-`openSession(login, password)` - starts a new session using provided login and password, returns sessionId
-
-`getSession(sessionId)` - returns the specified BetfairSession object
-
-`closeSession(sessionId)` - close session with given sessionId, sends logout
-
-'closeAllSessions()' - close all the sessions, sends logout 
 
 Example:
     var betfairSports = require("betfair-sports-api");
