@@ -39,7 +39,7 @@ API
 
 ### Betfair invocation support status ###
 
-<table cellspacing=1>
+<table cellspacing=1 cellpadding=1>
     <tr><th>API call</th><th>Status</th></tr>
     <tr><th colspan=2>Session management API calls</th></tr>
     <tr><td>login</td><td><b>Done</b> (with limits)</td></tr>
