@@ -31,6 +31,7 @@ Logging in to Betfair:
 Placing a bet:
 
 Logging out from Betfair:
+
         session.close(function(err, res) {
             if(err)
                 console.log('Logout error:',err);
