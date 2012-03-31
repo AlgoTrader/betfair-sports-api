@@ -32,23 +32,23 @@ Placing a bet:
 
 Logging out from Betfair:
 
-        session.close(function(err, res) {
-            if(err)
-                console.log('Logout error:',err);
-            else
-                console.log('Logged out OK');
-        });
+    session.close(function(err, res) {
+        if(err)
+            console.log('Logout error:',err);
+        else
+            console.log('Logged out OK');
+    });
  
 API
 ---
 
-Session management API calls
+###Session management API calls###
 <a href=#>login</a> 
 <a href=#>logout</a> 
 <a href=#>keepAlive</a>
 
-Readonly API calls
-
+###Readonly API calls###
+<a href=#>getAllMarkets</a>
 
     
 
