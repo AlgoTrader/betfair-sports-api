@@ -54,7 +54,7 @@ async.series({
     },
 
     // invoke getMarketTradedVolumeCompressed on the single market
-    getMarketPricesCompressed : function(cb) {
+    getMarketTradedVolumeCompressed : function(cb) {
         console.log('Call getMarketTradedVolumeCompressed for marketId="%s"',
                 marketId);
         var inv = session.getMarketTradedVolumeCompressed(marketId);
