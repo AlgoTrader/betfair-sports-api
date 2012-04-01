@@ -2,10 +2,11 @@
   "author": "Anton Zemlyanov <anton.zem at google mail>",
   "name": "betfair-sports-api",
   "description": "Betfair Sports API for Node",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": {
     "url": "https://github.com/BetfairTrader/betfair-sports-api"
   },
+  "keywords" : ["betfair"],
   "main": "index.js",
   "dependencies": { "libxmljs" : "*", "async" : "*" },
   "devDependencies": {},
