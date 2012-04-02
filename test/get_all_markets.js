@@ -11,7 +11,7 @@ account.login = account.login || 'nobody';
 account.password = account.password || 'password';
 
 var betfairSport = require('../index.js');
-var session = betfairSport.openSession(account.login, account.password);
+var session = betfairSport.newSession(account.login, account.password);
 
 async.series({
     // Login to Betfair
