@@ -54,7 +54,7 @@ async.series({
     },
 
     // invoke getMarketProfitAndLoss on the single market
-    getMarketPricesCompressed : function(cb) {
+    getMarketProfitAndLoss : function(cb) {
         console.log('Call getMarketProfitAndLoss for marketId="%s"',
                 marketId);
         var inv = session.getMarketProfitAndLoss(marketId,false);
