@@ -5,9 +5,7 @@
 // 
 //
 // Exported properties:
-//   openSession  - opens Betfair Session
-//   closeSession - close Betfair Session
-//   getSession   - get Betfair Session
+//   newSession  - create Betfair Session
 
 var betfairSession = require("./lib/betfair_session");
 exports.newSession  = betfairSession.newSession;
