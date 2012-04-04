@@ -1,17 +1,21 @@
-var https = require('https');
-var fs = require('fs');
 var util = require('util');
 var async = require('async')
 
-var account = JSON.parse(fs.readFileSync('/etc/bf/account.json'));
+// Betfair account data
+var login = process.env['BF_LOGIN'] || "nobody";
+var password = process.env['BF_PASSWORD'] || "password";
 
+// Number of parallel keepAlive requests  
+var keepAliveRequests = 10;
+
+// HTTPS tuning, number of concurrent HTTPS connections to use
+var https = require('https');
 https.globalAgent.maxSockets = 5;
 
-account.login = account.login || 'nobody';
-account.password = account.password || 'password';
-
+//Create session to Betfair
 var betfairSport = require('../index.js');
-var session = betfairSport.newSession(account.login, account.password);
+var session = betfairSport.newSession(login, password);
+
 var marketId;
 
 async.series({

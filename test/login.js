@@ -1,20 +1,17 @@
-var fs = require('fs');
-var account = JSON.parse(fs.readFileSync("/etc/bf/account.json"));
-
-account.login = account.login || "nobody";
-account.password = account.password || "password";
+// Betfair account data
+var login = process.env['BF_LOGIN'] || "nobody";
+var password = process.env['BF_PASSWORD'] || "password";
 
 var betfairGlobalService = require("../lib/betfair_global_service.js");
 
 var loginRequest = {
     locationId : "0",
-    password : account.password,
+    password : password,
     productId : "82",
-    username : account.login,
+    username : login,
     vendorSoftwareId : "0"
 };
-console.log("login Request:");
-console.log(loginRequest);
+console.log("login Request:", loginRequest);
 
 var login = betfairGlobalService.login(loginRequest);
 login.execute(function(err, resp) {
