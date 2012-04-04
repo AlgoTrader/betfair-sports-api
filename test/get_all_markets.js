@@ -27,7 +27,7 @@ async.series({
         });
     },
 
-    // invoke getAllMArkets at uk exchange for soccer
+    // invoke getAllMArkets at uk exchange for tennis
     getAllMarkets : function(cb) {
         console.log('Get available tennis matches');
 
