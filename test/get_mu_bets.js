@@ -5,9 +5,6 @@ var async = require('async')
 var login = process.env['BF_LOGIN'] || "nobody";
 var password = process.env['BF_PASSWORD'] || "password";
 
-// Number of parallel keepAlive requests  
-var keepAliveRequests = 10;
-
 // HTTPS tuning, number of concurrent HTTPS connections to use
 var https = require('https');
 https.globalAgent.maxSockets = 5;
