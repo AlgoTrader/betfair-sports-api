@@ -86,6 +86,7 @@ async.series({
             console.log("marketStatus:", market.marketStatus);
             console.log("inPlayDelay:", market.inPlayDelay);
             if(parseInt(market.inPlayDelay)>0) {
+                console.log("ERROR: Market is in-play, stop test");
                 cb("Market is inPlay", null);
                 return;
             }
