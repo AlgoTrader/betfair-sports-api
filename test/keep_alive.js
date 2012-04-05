@@ -19,7 +19,7 @@ var session = betfairSport.newSession(login, password);
 async.series({
     // Login to Betfair
     login : function(cb) {
-        console.log('Logging in to Betfair...');
+        console.log('===== Logging in to Betfair... =====');
         session.open(function onLoginFinished(err, res) {
             if (err) {
                 console.log('Login error', err);
@@ -32,7 +32,7 @@ async.series({
 
     // Send a number of keepAlive requests
     sendKeepAlives : function(cb) {
-        console.log('Send %s keepAlive requests', keepAliveRequests);
+        console.log('===== Send %s keepAlive requests =====', keepAliveRequests);
 
         var keepAlives = [];
         for ( var cnt = 0; cnt < keepAliveRequests; ++cnt)
@@ -51,7 +51,7 @@ async.series({
 
     // Logout from Betfair
     logout : function(cb) {
-        console.log('Logging out...');
+        console.log('===== Logging out... =====');
         session.close(function(err, res) {
             console.log('Logged out OK');
         });

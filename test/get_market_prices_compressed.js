@@ -18,7 +18,7 @@ var marketId;
 async.series({
     // Login to Betfair
     login : function(cb) {
-        console.log('Logging in to Betfair...');
+        console.log('===== Logging in to Betfair... =====');
         session.open(function onLoginFinished(err, res) {
             if (err) {
                 console.log('Login error', err);
@@ -31,7 +31,7 @@ async.series({
 
     // invoke getAllMArkets and get the first tennis 'Match Odds'
     getAllMarkets : function(cb) {
-        console.log('Get available tennis matches');
+        console.log('===== Get available tennis matches =====');
 
         // eventTypeIds 1-soccer, 2-tennis
         var inv = session.getAllMarkets({
@@ -56,7 +56,7 @@ async.series({
 
     // invoke getMarketPircesCompressed on the single market
     getMarketPricesCompressed : function(cb) {
-        console.log('Call getMarketPricesCompressed for marketId="%s"',
+        console.log('===== Call getMarketPricesCompressed for marketId="%s" =====',
                 marketId);
         var inv = session.getMarketPricesCompressed(marketId);
         inv.execute(function(err, res) {
@@ -96,7 +96,7 @@ async.series({
 
     // Logout from Betfair
     logout : function(cb) {
-        console.log('Logging out...');
+        console.log('===== Logging out... =====');
         session.close(function(err, res) {
             console.log('Logged out OK');
             cb(null, "OK");

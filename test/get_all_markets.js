@@ -16,7 +16,7 @@ var session = betfairSport.newSession(login, password);
 async.series({
     // Login to Betfair
     login : function(cb) {
-        console.log('Logging in to Betfair...');
+        console.log('===== Logging in to Betfair... =====');
         session.open(function onLoginFinished(err, res) {
             if (err) {
                 console.log('Login error', err);
@@ -29,7 +29,7 @@ async.series({
 
     // invoke getAllMArkets at uk exchange for tennis
     getAllMarkets : function(cb) {
-        console.log('Get available tennis matches');
+        console.log('===== Get available tennis matches =====');
 
         // eventTypeIds 1-soccer, 2-tennis
         var inv = session.getAllMarkets({
@@ -54,7 +54,7 @@ async.series({
 
     // Logout from Betfair
     logout : function(cb) {
-        console.log('Logging out...');
+        console.log('===== Logging out... =====');
         session.close(function(err, res) {
             console.log('Logged out OK');
             cb(null, "OK");
