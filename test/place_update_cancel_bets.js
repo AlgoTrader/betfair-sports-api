@@ -7,7 +7,7 @@ var password = process.env['BF_PASSWORD'] || "password";
 
 //HTTPS tuning, number of concurrent HTTPS connections to use
 var https = require('https');
-https.globalAgent.maxSockets = 5;
+https.globalAgent.maxSockets = 1;
 
 //Create session to Betfair
 var betfairSport = require('../index.js');
