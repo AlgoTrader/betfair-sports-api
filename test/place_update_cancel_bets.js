@@ -200,11 +200,11 @@ async.series({
             console.log('action:', res.action, 'error:', err,
                     'duration:', res.duration() / 1000);
             if (err) {
-                cb("Error in updateBets", null);
+                cb("Error in cancelBets", null);
             }
             //console.log(res.result);
             if(res.result.betResults && res.result.betResults.length!=1)
-                cb("Error in updateBets", null);
+                cb("Error in cancelBets", null);
             
             var betResult = res.result.betResults[0];
             console.log("cancelBets results:") 
