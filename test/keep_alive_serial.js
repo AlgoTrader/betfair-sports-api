@@ -45,19 +45,10 @@ async.series({
         .log('===== Send %s keepAlive requests =====',
                 keepAliveRequests);
 
-        async.series([ sendKeepAlive, 
-                       sendKeepAlive, 
-                       sendKeepAlive,
-                       sendKeepAlive, 
-                       sendKeepAlive, 
-                       sendKeepAlive, 
-                       sendKeepAlive,
-                       sendKeepAlive, 
-                       sendKeepAlive, 
-                       sendKeepAlive, 
-                       sendKeepAlive,
-                       sendKeepAlive 
-                       ], 
+        var reqs = [];
+        for(var cnt=0; cnt<keepAliveRequests; ++cnt)
+           reqs.push(sendKeepAlive);
+        async.series(reqs, 
                        function() {
                             cb(null, "OK");
                         });
