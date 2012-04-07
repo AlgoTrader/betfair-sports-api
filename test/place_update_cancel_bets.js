@@ -156,9 +156,9 @@ async.series({
         console.log('===== updateBets for betId=%s, change bet size =====',betId);
         var bet = { 
                 betId: betId,
-                newBetPersistenceType: "NONE",
+                newBetPersistenceType: "IP",
                 newPrice : "1.01",
-                newSize : "4.0",
+                newSize : "5.0",
                 oldBetPersistenceType: "NONE",
                 oldPrice : "1.01",
                 oldSize : "5.0"
@@ -171,7 +171,7 @@ async.series({
             if (err) {
                 cb("Error in updateBets", null);
             }
-            //console.log(res.result);
+            console.log(res.result);
             if(res.result.betResults && res.result.betResults.length!=1)
                 cb("Error in updateBets", null);
             
