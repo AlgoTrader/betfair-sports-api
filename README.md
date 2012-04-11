@@ -49,6 +49,9 @@ API
 
 ###Readonly API calls###
 <a href=#>getAllMarkets</a>
+<a href=#>getMarket</a>
+<a href=#>getMarketPricesCompressed</a>
+<a href=#>getCompleteMarketPricesCompressed</a>
 
     
 
