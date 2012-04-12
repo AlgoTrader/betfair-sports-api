@@ -2,7 +2,6 @@
 //
 // Betfair Sports API for node
 // see Sports API documentation on http://bdp.betfair.com
-// 
 //
 // Exported properties:
 //   newSession  - create Betfair Session
