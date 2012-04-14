@@ -13,3 +13,6 @@ var betfairInvocation = require('./lib/betfair_invocation');
 exports.isBetEmulationEnabled = betfairInvocation.isBetEmulationEnabled;
 exports.setBetEmulationEnabled = betfairInvocation.setBetEmulationEnabled;
 exports.setXmlLoggingEnabled = betfairInvocation.setXmlLoggingEnabled;
+
+var betfairInvocationHistory = require('./lib/betfair_invocation_history');
+exports.getInvocationHistory = betfairInvocationHistory.getInvocationHistory;
