@@ -6,6 +6,10 @@
 // Exported properties:
 //   newSession  - create Betfair Session
 
-var betfairSession = require("./lib/betfair_session");
+var betfairSession = require('./lib/betfair_session');
 exports.newSession  = betfairSession.newSession;
 
+var betfairInvocation = require('./lib/betfair_invocation');
+exports.isBetEmulationEnabled = betfairInvocation.isBetEmulationEnabled;
+exports.setBetEmulationEnabled = betfairInvocation.setBetEmulationEnabled;
+exports.setXmlLoggingEnabled = betfairInvocation.setXmlLoggingEnabled;
