@@ -4,16 +4,15 @@ Betfair Sports API for Node.js
 **Warning: The betfair-sports-api is pretty usable not but not tested in production**<br>
 email: anton.zem at google mail
 
-##Installation##
+###Installation###
 
     npm install betfair-sports-api
 
-Synopsis
---------
+###Synopsis###
 
 Examples of what betfair-sports-api for Node.js looks like:
 
-Logging in to Betfair:
+####Logging in to Betfair:####
     
     var betfairSport = require('betfair-sports-api');
     var login = 'nobody';
