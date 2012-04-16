@@ -19,11 +19,8 @@ Examples of what betfair-sports-api for Node.js looks like:
     var password = 'password';
 
     var session = betfairSport.openSession(login, password);
-    session.open(function onLoginFinished(err, res) {
-        if (err) 
-            console.log('Login error:', err);
-        else
-            console.log('Logged in OK');
+    session.open(function (err, res) {
+        console.log( !err ? "Login OK" : "Login error"); 
     }
 
 Placing a bet:
@@ -31,10 +28,7 @@ Placing a bet:
 Logging out from Betfair:
 
     session.close(function(err, res) {
-        if(err)
-            console.log('Logout error:',err);
-        else
-            console.log('Logged out OK');
+        console.log( !err ? "Logout OK" : "Logout error"); 
     });
  
 API
