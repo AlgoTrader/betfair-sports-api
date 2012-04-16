@@ -100,6 +100,7 @@ async.series({
         session.close(function(err, res) {
             console.log('Logged out OK');
             cb(null, "OK");
+            process.exit(0);
         });
     }
 });

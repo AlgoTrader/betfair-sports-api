@@ -6,11 +6,11 @@ var login = process.env['BF_LOGIN'] || "nobody";
 var password = process.env['BF_PASSWORD'] || "password";
 
 // Number of parallel keepAlive requests  
-var keepAliveRequests = 10;
+var keepAliveRequests = 20;
 
 // HTTPS tuning, number of concurrent HTTPS connections to use
-var https = require('https');
-https.globalAgent.maxSockets = 5;
+//var https = require('https');
+//https.globalAgent.maxSockets = 5;
 
 //Create session to Betfair
 var betfairSport = require('../index.js');
@@ -32,7 +32,7 @@ async.series({
 
     // Send a number of keepAlive requests
     sendKeepAlives : function(cb) {
-        console.log('===== Send %s keepAlive requests =====', keepAliveRequests);
+        console.log('===== Send %s parallel keepAlive requests =====', keepAliveRequests);
 
         var keepAlives = [];
         for ( var cnt = 0; cnt < keepAliveRequests; ++cnt)
@@ -54,6 +54,7 @@ async.series({
         console.log('===== Logging out... =====');
         session.close(function(err, res) {
             console.log('Logged out OK');
+            process.exit(0);
         });
         cb(null, "OK");
     }

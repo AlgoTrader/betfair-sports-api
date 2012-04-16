@@ -82,6 +82,7 @@ async.series({
         console.log('===== Logging out... =====');
         session.close(function(err, res) {
             console.log('Logged out OK');
+            process.exit(0);
             cb(null, "OK");
         });
     }
