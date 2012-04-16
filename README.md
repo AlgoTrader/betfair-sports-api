@@ -4,8 +4,7 @@ Betfair Sports API for Node.js
 **Warning: The betfair-sports-api is pretty usable not but not tested in production**<br>
 email: anton.zem at google mail
 
-Installation
-------------
+##Installation##
 
     npm install betfair-sports-api
 
