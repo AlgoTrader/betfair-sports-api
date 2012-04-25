@@ -6,7 +6,7 @@ var login = process.env['BF_LOGIN'] || "nobody";
 var password = process.env['BF_PASSWORD'] || "password";
 
 // Number of parallel keepAlive requests  
-var keepAliveRequests = 20;
+var keepAliveRequests = 100;
 
 // HTTPS tuning, number of concurrent HTTPS connections to use
 //var https = require('https');
