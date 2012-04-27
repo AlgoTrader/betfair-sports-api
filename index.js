@@ -9,6 +9,9 @@
 var betfairSession = require('./lib/betfair_session');
 exports.newSession  = betfairSession.newSession;
 
+var betfairPrice = require('./lib/betfair_price');
+exports.newBetfairPrice = betfairPrice.newBetfairPrice;
+
 var betfairInvocation = require('./lib/betfair_invocation');
 exports.isBetEmulationEnabled = betfairInvocation.isBetEmulationEnabled;
 exports.setBetEmulationEnabled = betfairInvocation.setBetEmulationEnabled;
@@ -17,6 +20,4 @@ exports.setXmlLoggingEnabled = betfairInvocation.setXmlLoggingEnabled;
 var betfairInvocationHistory = require('./lib/betfair_invocation_history');
 exports.getInvocationHistory = betfairInvocationHistory.getInvocationHistory;
 
-var betfairPrice = require('./lib/betfair_price');
-exports.BetfairPrice = betfairPrice.BetfairPrice;
 
