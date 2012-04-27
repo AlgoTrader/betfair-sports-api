@@ -16,3 +16,7 @@ exports.setXmlLoggingEnabled = betfairInvocation.setXmlLoggingEnabled;
 
 var betfairInvocationHistory = require('./lib/betfair_invocation_history');
 exports.getInvocationHistory = betfairInvocationHistory.getInvocationHistory;
+
+var betfairPrice = require('./lib/betfair_price');
+exports.BetfairPrice = betfairPrice.BetfairPrice;
+
