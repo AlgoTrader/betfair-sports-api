@@ -14,18 +14,35 @@ Examples of what betfair-sports-api for Node.js looks like:
 
 ####Logging in to Betfair:####
     
-    var betfairSport = require('betfair-sports-api');
+    var betfair = require('betfair-sports-api');
     var login = 'nobody';
     var password = 'password';
 
-    var session = betfairSport.openSession(login, password);
+    var session = betfair.newSession(login, password);
     session.open(function (err, res) {
         console.log( !err ? "Login OK" : "Login error"); 
     }
 
-Placing a bet:
+####Placing a bet:####
 
-Logging out from Betfair:
+    var bet = { 
+                asianLineId: "0",
+                betCategoryType: "E",
+                betPersistenceType: "NONE",
+                betType: "L",
+                bspLiability: "0",
+                marketId: "1234567890",
+                price: "1.01",
+                selectionId: "123456",
+                size: "5.00"
+    }
+    var inv = session.placeBets([bet]);
+    inv.execute(function(err, res) {
+        console.log( !err ? "Bet placed OK" : "Bet place error"); 
+    }
+
+
+####Logging out from Betfair:####
 
     session.close(function(err, res) {
         console.log( !err ? "Logout OK" : "Logout error"); 
@@ -35,15 +52,13 @@ API
 ---
 
 ###Session management API calls###
-<a href=#>login</a> 
-<a href=#>logout</a> 
-<a href=#>keepAlive</a>
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
 
 ###Readonly API calls###
-<a href=#>getAllMarkets</a>
-<a href=#>getMarket</a>
-<a href=#>getMarketPricesCompressed</a>
-<a href=#>getCompleteMarketPricesCompressed</a>
 
     
 
