@@ -1,10 +1,10 @@
 # Betfair Sports API for Node.js
 
-## 1.Installation ##
+## Installation ##
 
     npm install betfair-sports-api
 
-## 2.Synopsis ##
+## Synopsis ##
 
 Examples of what betfair-sports-api for Node.js looks like:
 
@@ -49,43 +49,58 @@ session.close(function(err, res) {
 });
 ```
 
-## 3.Betfair Sports API Reference ##
+## Betfair Sports API Reference ##
 
-#### var betfair = require('betfair-sports-api') ####
+```JavaScript
+var betfair = require('betfair-sports-api')
+```
 
 includes **betfair-sports-api** functions into current module
 
-### 3.1 Create a new session to Betfair ###
+### Create a new session to Betfair ###
 
-#### var session = betfair.newSession('login','password') ####
+```JavaScript
+var session = betfair.newSession('login','password');
+```
 Creates a new session to Betfair, returns `session` object. Session should not be confused with 
 a HTTPS connection, in fact, session uses a pool of HTTPS connections. `newSession` does not connect to Betfair, 
 it just creates the `session` object, call the `open` method to issue a *login* invocation.
 
-### 3.2 Session object methods ###
+### Session object methods ###
 
-#### session.open( function(err, invocation) ) ####
+```JavaScript
+session.open( function(err, invocation) {...} );
+```
 Issue the **login** invocation using *login* and *password* specified in `newSession` and 
 call the callback on completion. if `err` is null the **login** invocation was successful, otherwise `err` 
 describes error. You should not worry about the security token, it is remembered in `session.header` 
 property and used automatically in all the further invacations. Returns nothing.
 
-#### session.close( function(err, invocation) ) ####
+
+```JavaScript
+session.close( function(err, invocation) {...} );
+```
 Issue the **logout** invocation and call the callback on completion. 
 if `err` is null the **logout** invocation was successful, otherwise `err` 
 describes error. Returns nothing.
 
-#### var inv = session.keepAlive()####
+
+```JavaScript
+var inv = session.keepAlive();
+```
 Creates a **keepAlive** invocation object. Use `inv.execute( function(err,inv) {...} )` 
 to send the **keepAlive** to server and get its result.
 
-#### var inv = session.getAllMarkets(options) ####
+
+```JavaScript
+var inv = session.getAllMarkets(options)
+```
 Creates a **getAllMarkets** invocation object. Use `inv.execute( function(err,inv) {...} )` 
 to send the **getAllMarkets** to server and get its result. The options are:<BR>
 - `locale`: String
     The locale to use when returning results. If not specified, the default 
     locale for the user’s account is used.
-- `includeCouponLinks`: bool
+- `eventTypeIds`: Array
     If set, the events types to return. If not specified, markets from all event types are returned.
     For example `[1, 2]` will return only soccer and tennis markets.
 - `fromDate`: Date
@@ -95,9 +110,12 @@ to send the **getAllMarkets** to server and get its result. The options are:<BR>
    If this is set, the response contains only markets where the market time is not after 
    the specified date. A null value indicated no limit. 
 
-#### var inv = session.getMarket(marketId, options) ####
-Creates a *getMarket* invocation object for market *marketId*. Use `inv.execute( function(err,inv) {...} )` 
-to send the *getMarket* to server and get its result. The options are:<BR>
+
+```JavaScript
+var inv = session.getMarket(marketId, options);
+```
+Creates a **getMarket** invocation object for market *marketId*. Use `inv.execute( function(err,inv) {...} )` 
+to send the **getMarket** to server and get its result. The options are:<BR>
 - `locale`: String
     The locale to use when returning results. If not specified, the default 
     locale for the user’s account is used.
@@ -105,3 +123,4 @@ to send the *getMarket* to server and get its result. The options are:<BR>
     If you set this parameter to true, the service response contains a list of any 
     coupons that include the market you have requested. If you set the parameter 
     to false, no coupon data is returned.
+
