@@ -41,7 +41,7 @@ inv.execute(function(err, res) {
 }
 ```
 
-### Logging out from Betfair: ###
+### Logout from Betfair: ###
 
 ```JavaScript
 session.close(function(err, res) {
@@ -57,47 +57,47 @@ var betfair = require('betfair-sports-api')
 
 includes **betfair-sports-api** functions into current module
 
-### Create a new session to Betfair ###
+### <font color="blue">Create a new session to Betfair</font> ###
 
-```JavaScript
-var session = betfair.newSession('login','password');
-```
+#### var session = betfair.newSession('login','password'); ####
+
 Creates a new session to Betfair, returns `session` object. Session should not be confused with 
 a HTTPS connection, in fact, session uses a pool of HTTPS connections. `newSession` does not connect to Betfair, 
 it just creates the `session` object, call the `open` method to issue a *login* invocation.
 
 ### Session object methods ###
 
-```JavaScript
-session.open( function(err, invocation) {...} );
-```
+#### session.open( function(err, invocation) {...} ); ####
+
 Issue the **login** invocation using *login* and *password* specified in `newSession` and 
 call the callback on completion. if `err` is null the **login** invocation was successful, otherwise `err` 
 describes error. You should not worry about the security token, it is remembered in `session.header` 
 property and used automatically in all the further invacations. Returns nothing.
 
+-----------------------------------------------------------------------------------------------
 
-```JavaScript
-session.close( function(err, invocation) {...} );
-```
+
+#### session.close( function(err, invocation) {...} ); ####
+
 Issue the **logout** invocation and call the callback on completion. 
 if `err` is null the **logout** invocation was successful, otherwise `err` 
 describes error. Returns nothing.
 
+-----------------------------------------------------------------------------------------------
 
-```JavaScript
-var inv = session.keepAlive();
-```
+
+#### var inv = session.keepAlive(); ####
+
 Creates a **keepAlive** invocation object. Use `inv.execute( function(err,inv) {...} )` 
 to send the **keepAlive** to server and get its result.
 
+-----------------------------------------------------------------------------------------------
 
-```JavaScript
-var inv = session.getAllMarkets(options)
-```
+#### var inv = session.getAllMarkets(options) ####
+
 Creates a **getAllMarkets** invocation object. Use `inv.execute( function(err,inv) {...} )` 
 to send the **getAllMarkets** to server and get its result. The options are:<BR>
-- `locale`: String
+- `locale`: String<BR>
     The locale to use when returning results. If not specified, the default 
     locale for the user’s account is used.
 - `eventTypeIds`: Array
@@ -110,13 +110,13 @@ to send the **getAllMarkets** to server and get its result. The options are:<BR>
    If this is set, the response contains only markets where the market time is not after 
    the specified date. A null value indicated no limit. 
 
+-----------------------------------------------------------------------------------------------
 
-```JavaScript
-var inv = session.getMarket(marketId, options);
-```
+#### var inv = session.getMarket(marketId, options); ####
+
 Creates a **getMarket** invocation object for market *marketId*. Use `inv.execute( function(err,inv) {...} )` 
 to send the **getMarket** to server and get its result. The options are:<BR>
-- `locale`: String
+- `locale`: String<BR>
     The locale to use when returning results. If not specified, the default 
     locale for the user’s account is used.
 - `includeCouponLinks`: bool
