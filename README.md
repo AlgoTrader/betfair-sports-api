@@ -6,8 +6,6 @@
 
 ## Synopsis ##
 
-Examples of what betfair-sports-api for Node.js looks like:
-
 ### Logging in to Betfair: ###
     
 ```JavaScript
@@ -65,6 +63,8 @@ Creates a new session to Betfair, returns `session` object. Session should not b
 a HTTPS connection, in fact, session uses a pool of HTTPS connections. `newSession` does not connect to Betfair, 
 it just creates the `session` object, call the `open` method to issue a *login* invocation.
 
+-----------------------------------------------------------------------------------------------
+
 ### Session object methods ###
 
 #### session.open( function(err, invocation) {...} ); ####
@@ -100,13 +100,13 @@ to send the **getAllMarkets** to server and get its result. The options are:<BR>
 - `locale`: String<BR>
     The locale to use when returning results. If not specified, the default 
     locale for the user’s account is used.
-- `eventTypeIds`: Array
+- `eventTypeIds`: Array<BR>
     If set, the events types to return. If not specified, markets from all event types are returned.
     For example `[1, 2]` will return only soccer and tennis markets.
-- `fromDate`: Date
+- `fromDate`: Date<BR>
     If this is set, the response contains only markets where the market time is not before 
     the specified date. A null value indicated no limit.
-- `toDate`: Date
+- `toDate`: Date<BR>
    If this is set, the response contains only markets where the market time is not after 
    the specified date. A null value indicated no limit. 
 
@@ -119,7 +119,7 @@ to send the **getMarket** to server and get its result. The options are:<BR>
 - `locale`: String<BR>
     The locale to use when returning results. If not specified, the default 
     locale for the user’s account is used.
-- `includeCouponLinks`: bool
+- `includeCouponLinks`: bool<BR>
     If you set this parameter to true, the service response contains a list of any 
     coupons that include the market you have requested. If you set the parameter 
     to false, no coupon data is returned.
