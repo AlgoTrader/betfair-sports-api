@@ -8,10 +8,6 @@ var password = process.env['BF_PASSWORD'] || "password";
 // Number of parallel keepAlive requests  
 var keepAliveRequests = 100;
 
-// HTTPS tuning, number of concurrent HTTPS connections to use
-//var https = require('https');
-//https.globalAgent.maxSockets = 5;
-
 //Create session to Betfair
 var betfairSport = require('../index.js');
 var session = betfairSport.newSession(login, password);
