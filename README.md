@@ -4,6 +4,12 @@
 
     npm install betfair-sports-api
 
+## Tutorial ##
+
+There is the **[Betfair Sports API for Node.js Tutorial](https://github.com/AlgoTrader/betfair-sports-api/wiki)**
+that provides quick and easy start with the library. No Node.js and minimal JavaScript knowledge is required.
+**Please note that the tutorial is not finished yet, but is still very good for start.**
+
 ## Synopsis ##
 
 ### Logging in to Betfair: ###
