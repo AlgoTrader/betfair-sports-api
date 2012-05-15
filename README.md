@@ -102,7 +102,8 @@ to send the **keepAlive** to server and get its result.
 #### var inv = session.getAllMarkets(options) ####
 
 Creates a **getAllMarkets** invocation object. Use `inv.execute( function(err,inv) {...} )` 
-to send the **getAllMarkets** to server and get its result. The options are:<BR>
+to send the **getAllMarkets** to server and get its result. 
+The options are:<BR>
 - `locale`: String<BR>
     The locale to use when returning results. If not specified, the default 
     locale for the user’s account is used.
@@ -121,7 +122,8 @@ to send the **getAllMarkets** to server and get its result. The options are:<BR>
 #### var inv = session.getMarket(marketId, options); ####
 
 Creates a **getMarket** invocation object for market *marketId*. Use `inv.execute( function(err,inv) {...} )` 
-to send the **getMarket** to server and get its result. The options are:<BR>
+to send the **getMarket** to server and get its result. 
+The options are:<BR>
 - `locale`: String<BR>
     The locale to use when returning results. If not specified, the default 
     locale for the user’s account is used.
@@ -129,4 +131,38 @@ to send the **getMarket** to server and get its result. The options are:<BR>
     If you set this parameter to true, the service response contains a list of any 
     coupons that include the market you have requested. If you set the parameter 
     to false, no coupon data is returned.
+
+-----------------------------------------------------------------------------------------------
+
+#### var inv = session.getMarketPricesCompressed(marketId, options); ####
+
+Creates a **getMarketPricesCompressed** invocation object for market *marketId*. 
+Use `inv.execute( function(err,inv) {...} )`  to send the **getMarketPricesCompressed** to server 
+and get its result. 
+The options are:<BR>
+- `currencyCode`: String<BR>
+    The three letter ISO 4217 code. If not supplied, user’s currency is used
+
+-----------------------------------------------------------------------------------------------
+
+#### var inv = session.getCompleteMarketPricesCompressed(marketId, options); ####
+
+Creates a **getCompleteMarketPricesCompressed** invocation object for market *marketId*. 
+Use `inv.execute( function(err,inv) {...} )`  to send the **getCompleteMarketPricesCompressed** to server 
+and get its result. 
+The options are:<BR>
+- `currencyCode`: String<BR>
+    The three letter ISO 4217 code. If not supplied, user’s currency is used
+
+-----------------------------------------------------------------------------------------------
+
+#### var inv = session.getMUBets(betStatus, orderBy, count, sortOrder, startRecord, options); ####
+
+Creates a **getMUBets** invocation object for market *marketId*. 
+Use `inv.execute( function(err,inv) {...} )`  to send the **getMUBets** to server 
+and get its result. 
+The options are:<BR>
+- `currencyCode`: String<BR>
+    The three letter ISO 4217 code. If not supplied, user’s currency is used
+
 
