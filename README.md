@@ -12,7 +12,7 @@ that provides quick and easy start with the library. No Node.js and minimal Java
 
 ## Synopsis ##
 
-### Logging in to Betfair: ###
+### Login to Betfair: ###
     
 ```JavaScript
 var betfair = require('betfair-sports-api');
@@ -45,14 +45,6 @@ inv.execute(function(err, res) {
 }
 ```
 
-### Logout from Betfair: ###
-
-```JavaScript
-session.close(function(err, res) {
-    console.log( !err ? "Logout OK" : "Logout error"); 
-});
-```
-
 ## Betfair Sports API Reference ##
 
 ```JavaScript
@@ -61,17 +53,36 @@ var betfair = require('betfair-sports-api')
 
 includes **betfair-sports-api** functions into current module
 
-### <font color="blue">Create a new session to Betfair</font> ###
+### Exported functions ###
 
+Summary:
+[newSession](#newSession), [newBetfairPrice](#newBetfairPrice), 
+[isBetEmulationEnabled](#isBetEmulationEnabled), [setBetEmulationEnabled](#setBetEmulationEnabled),
+[setXmlLoggingEnabled](#setXmlLoggingEnabled), [getInvocationHistory](#getInvocationHistory)
+
+<a name='newSession'>
 #### var session = betfair.newSession('login','password'); ####
 
 Creates a new session to Betfair, returns `session` object. Session should not be confused with 
 a HTTPS connection, in fact, session uses a pool of HTTPS connections. `newSession` does not connect to Betfair, 
 it just creates the `session` object, call the `open` method to issue a *login* invocation.
+See the [Session object methods](#sessionObjectMethods) for details.
 
 -----------------------------------------------------------------------------------------------
 
+<a name='newBetfairPrice'>
+#### var betPrice = betfair.newBetfairPrice(size); ####
+
+Creates a new Betfair Price object. The Betfair price cannot be of arbitrary size, it should 
+be a properly rounded (quantized) value. The newBetfairPrice allows to round price to a valid Betfair value, 
+increment and decrement price values. See the [Price object methods](#priceObjectMethods) for details
+
+-----------------------------------------------------------------------------------------------
+
+<a name='sessionObjectMethods'>
 ### Session object methods ###
+
+Summary: [open](), [close](), [keepAlive]()
 
 #### session.open( function(err, invocation) {...} ); ####
 
@@ -165,4 +176,12 @@ The options are:<BR>
 - `currencyCode`: String<BR>
     The three letter ISO 4217 code. If not supplied, user’s currency is used
 
+-----------------------------------------------------------------------------------------------
+
+<a name='priceObjectMethods'>
+### Price object methods and properties ###
+
+#### price.size ####
+
+The quantized (or rounded) price value.
 
