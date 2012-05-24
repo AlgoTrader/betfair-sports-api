@@ -55,8 +55,8 @@ async.series({
 	// market
     getMUBets : function(cb)
     {
-        console.log('===== Call getMUBets for marketId="%s" =====', marketId);
-        var inv = session.getMUBets("MU", "PLACED_DATE", 200, "ASC", 0, {marketId:marketId});
+        console.log('===== Call getMUBetsLite for marketId="%s" =====', marketId);
+        var inv = session.getMUBetsLite("MU", "NONE", 200, "ASC", 0, {marketId:marketId});
         inv.execute(function(err, res) {
             console.log('action:', res.action, 'error:', err, 'duration:', res
                     .duration() / 1000);
@@ -66,11 +66,10 @@ async.series({
             //console.log( util.inspect(res.result, false, 10) );
             console.log("errorCode:", res.result.errorCode, 
             		"recCount", res.result.totalRecordCount );
-            for(var record in res.result.bets) {
-                var bet = res.result.bets[record];
-                console.log( "\tbetId=%s betStatus=%s size=%s price=%s",  bet.betId, bet.betStatus, bet.size, bet.price);
+            for(var record in res.result.betLites) {
+                var bet = res.result.betLites[record];
+                console.log( "\tbetId=%s betStatus=%s size=%s",  bet.betId, bet.betStatus, bet.size);
             }
-            	
             cb(null, "OK");
         });
     },
