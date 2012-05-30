@@ -9,6 +9,9 @@ var password = process.env['BF_PASSWORD'] || "password";
 var betfairSport = require('../index.js');
 var session = betfairSport.newSession(login, password);
 
+// Set filter for getAllMarkets
+betfairSport.addDesirableMarketName('Match Odds');
+
 async.series({
     // Login to Betfair
     login : function(cb) {
