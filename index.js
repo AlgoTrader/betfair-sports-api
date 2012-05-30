@@ -9,6 +9,9 @@
 var betfairSession = require('./lib/betfair_session');
 exports.newSession  = betfairSession.newSession;
 
+var betfairDecompress = require('./lib/betfair_decompress');
+exports.addDesirableMarketName  = betfairDecompress.addDesirableMarketName;
+
 var betfairPrice = require('./lib/betfair_price');
 exports.newBetfairPrice = betfairPrice.newBetfairPrice;
 
