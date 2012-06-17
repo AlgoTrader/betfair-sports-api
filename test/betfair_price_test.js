@@ -16,6 +16,27 @@ console.log('Price 30.00-50.00 rounded to 2     %s', newBetfairPrice(31.2345678)
 console.log('Price 50.00-100.00 rounded to 5    %s', newBetfairPrice(66.2345678).toString());
 console.log('Price 100.00-1000.00 rounded to 10 %s', newBetfairPrice(123.2345678).toString());
 
+console.log("Test spread:")
+var price = newBetfairPrice(1.01);
+console.log('Spread 1.01 to 1.01 is %s', price.spreadToPrice(1.01));
+console.log('Spread 1.01 to 1.02 is %s', price.spreadToPrice(1.02));
+console.log('Spread 1.01 to 1.10 is %s', price.spreadToPrice(1.10));
+console.log('Spread 1.01 to 2.0 is %s', price.spreadToPrice(2.0));
+console.log('Spread 1.01 to 1000 is %s', price.spreadToPrice(1000));
+var price = newBetfairPrice(1000);
+console.log('Spread 1000 to 1000 is %s', price.spreadToPrice(1000));
+console.log('Spread 1000 to 990 is %s', price.spreadToPrice(990));
+console.log('Spread 1000 to 500 is %s', price.spreadToPrice(500));
+console.log('Spread 1000 to 1.02 is %s', price.spreadToPrice(1.02));
+console.log('Spread 1000 to 1.01 is %s', price.spreadToPrice(1.01));
+var price = newBetfairPrice(2.0);
+console.log('Spread 2.0 to 2.0 is %s', price.spreadToPrice(2.0));
+console.log('Spread 2.0 to 2.02 is %s', price.spreadToPrice(2.02));
+console.log('Spread 2.0 to 1.99 is %s', price.spreadToPrice(1.99));
+console.log('Spread 2.0 to 1.01 is %s', price.spreadToPrice(1.01));
+console.log('Spread 2.0 to 1000 is %s', price.spreadToPrice(1000));
+
+
 console.log("Test accending prices:")
 var cnt = 0;
 var price = newBetfairPrice(1.01);
