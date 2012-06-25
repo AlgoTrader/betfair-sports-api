@@ -40,6 +40,7 @@ async.series({
             if (err) {
                 cb("Error in getAllMarkets", null);
             }
+            //console.log(res.result);
             for ( var index in res.result.marketData) {
                 market = res.result.marketData[index];
                 if (market.marketName != 'Match Odds')
