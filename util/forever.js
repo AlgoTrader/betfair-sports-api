@@ -105,7 +105,7 @@ ForeverAgentSSL.prototype.createConnection = createConnectionSSL
 ForeverAgentSSL.prototype.addRequestNoreuse = AgentSSL.prototype.addRequest
 
 function createConnectionSSL (port, host, options) {
-  var nodeVersion = process.versions.node.spilt('.');
+  var nodeVersion = process.versions.node.split('.');
   if(nodeVersion[0]==0 && nodeVersion[1]>=8)
     return tls.connect(port); // node 0.8
 
