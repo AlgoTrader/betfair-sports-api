@@ -9,6 +9,7 @@ var password = process.env['BF_PASSWORD'] || "password";
 var betfairSport = require('../index.js');
 var session = betfairSport.newSession(login, password);
 betfairSport.setBetEmulationEnabled(true);
+betfairSport.setXmlLoggingEnabled(true);
 
 var marketId;
 var selectionId;
@@ -125,7 +126,7 @@ async.series({
                 selectionId: selectionId,
                 size: "5.00"
         }
-        var inv = session.placeBets([bet]);
+        var inv = session.placeBets([bet, bet]);
         inv.execute(function(err, res) {
             console.log('action:', res.action, 'error:', err,
                     'duration:', res.duration() / 1000);

@@ -7,6 +7,7 @@ var password = process.env['BF_PASSWORD'] || "password";
 
 //Create session to Betfair
 var betfairSport = require('../index.js');
+//betfairSport.setXmlLoggingEnabled(true);
 var session = betfairSport.newSession(login, password);
 
 var marketId;

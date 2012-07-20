@@ -10,6 +10,7 @@ var betfairSport = require('../index.js');
 var session = betfairSport.newSession(login, password);
 
 // Set filter for getAllMarkets
+//betfairSport.setXmlLoggingEnabled(true);
 betfairSport.addDesirableMarketName('Match Odds');
 
 async.series({
