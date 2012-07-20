@@ -21,7 +21,7 @@ exports.isBetEmulationEnabled = function () {
     return betfairInvocation.isBetEmulationMode;
 }
 exports.setBetEmulationEnabled = function(flag) {
-    betfairInvocation.isbetEmulationMode = flag;
+    betfairInvocation.isBetEmulationMode = flag;
 }
 exports.setXmlLoggingEnabled = function(flag) {
     betfairInvocation.isXmlLoggingEnabled = flag;
