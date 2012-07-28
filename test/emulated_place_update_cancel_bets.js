@@ -76,7 +76,7 @@ async.series({
                 cb("Error in getCompleteMarketPricesCompressed", null);
             }
 
-            //console.log(util.inspect(res.result, false, 10));
+            console.log(util.inspect(res.result, false, 10));
 
             var market = res.result.completeMarketPrices;
             console.log("marketId:", market.marketId);
