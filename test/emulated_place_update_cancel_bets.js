@@ -9,7 +9,7 @@ var password = process.env['BF_PASSWORD'] || "password";
 var betfairSport = require('../index.js');
 var session = betfairSport.newSession(login, password);
 betfairSport.setBetEmulationEnabled(true);
-betfairSport.setXmlLoggingEnabled(true);
+//betfairSport.setXmlLoggingEnabled(true);
 
 var marketId;
 var selectionId;
@@ -63,6 +63,67 @@ async.series({
             cb(null, "OK");
         });
     },
+    
+    // invoke getCompleteMarketPircesCompressed on the single market
+    getCompleteMarketPricesCompressed : function(cb) {
+        console.log('===== Call getCompleteMarketPricesCompressed for marketId="%s" =====',
+                marketId);
+        var inv = session.getCompleteMarketPricesCompressed(marketId);
+        inv.execute(function(err, res) {
+            console.log('action:', res.action, 'error:', err,
+                    'duration:', res.duration() / 1000);
+            if (err) {
+                cb("Error in getCompleteMarketPricesCompressed", null);
+            }
+
+            //console.log(util.inspect(res.result, false, 10));
+
+            var market = res.result.completeMarketPrices;
+            console.log("marketId:", market.marketId);
+            console.log("inPlayDelay:", market.inPlayDelay);
+            // print players info
+            for ( var playerIndex = 0; playerIndex < market.runners.length; ++playerIndex) {
+                console.log("player %s", playerIndex);
+                var runner = market.runners[playerIndex];
+                console.log("\tselectionId:", runner.selectionId);
+                console.log("\tlastPriceMatched:", runner.lastPriceMatched);
+                console.log("\ttotalMatched:", runner.totalMatched);
+                for(var priceIndex = 0; priceIndex< runner.prices.length; ++priceIndex) {
+                    var price = runner.prices[priceIndex];
+                    console.log("\t\tprice:%s backAmount:%s layAmount:%s", 
+                            price.price, price.backAmount, price.layAmount);
+                }
+            }
+
+            // chose the selectionId of the player that has bigger lastPriceMatched
+            var player1 = market.runners[0];
+            var player2 = market.runners[1];
+            if( parseFloat(player1.lastPriceMatched) > parseFloat(player2.lastPriceMatched))
+                selectionId = player1.selectionId;
+            else
+                selectionId = player2.selectionId;
+            console.log("Will use selectionId %s for betting tests", selectionId);
+            
+            cb(null, "OK");
+        });
+    },
+   
+    // invoke getMarketTradedVolumeCompressed on the single market
+    getMarketTradedVolumeCompressed : function(cb) {
+        console.log('===== Call getMarketTradedVolumeCompressed for marketId="%s" =====',
+                marketId);
+        var inv = session.getMarketTradedVolumeCompressed(marketId);
+        inv.execute(function(err, res) {
+            console.log('action:', res.action, 'error:', err,
+                    'duration:', res.duration() / 1000);
+            if (err) {
+                cb("Error in getMarketTradedVolumeCompressed", null);
+            }
+            console.log(util.inspect(res.result, false, 10));
+            
+            cb(null, "OK");
+        });
+    },
 
     // invoke getMarketPircesCompressed on the single market
     // we first check if market is inPlay, if yes test is aborted
@@ -97,14 +158,6 @@ async.series({
                 console.log("\tselectionId:", runner.selectionId);
                 console.log("\tlastPriceMatched:", runner.lastPriceMatched);
             }
-            // chose the selectionId of the player that has bigger lastPriceMatched
-            var player1 = market.runners[0];
-            var player2 = market.runners[1];
-            if( parseFloat(player1.lastPriceMatched) > parseFloat(player2.lastPriceMatched))
-                selectionId = player1.selectionId;
-            else
-                selectionId = player2.selectionId;
-            console.log("Will use selectionId %s for betting tests", selectionId);
 
             cb(null, "OK");
         });
