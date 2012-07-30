@@ -168,7 +168,7 @@ async.series({
     placeBets : function(cb) {
         console.log('===== Place a test lay bet marketId=%s selectionId=%s =====',
                 marketId,selectionId);
-        var bet = { 
+        var bet1 = { 
                 asianLineId: "0",
                 betCategoryType: "E",
                 betPersistenceType: "NONE",
@@ -178,8 +178,19 @@ async.series({
                 price: "1.01",
                 selectionId: selectionId,
                 size: "5.00"
-        }
-        var inv = session.placeBets([bet, bet]);
+        };
+        var bet2 = { 
+                asianLineId: "0",
+                betCategoryType: "E",
+                betPersistenceType: "NONE",
+                betType: "L",
+                bspLiability: "0",
+                marketId: marketId,
+                price: "1.02",
+                selectionId: selectionId,
+                size: "5.00"
+        };
+        var inv = session.placeBets([bet1, bet2]);
         inv.execute(function(err, res) {
             console.log('action:', res.action, 'error:', err,
                     'duration:', res.duration() / 1000);
