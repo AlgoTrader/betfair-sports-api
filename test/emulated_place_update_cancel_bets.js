@@ -9,7 +9,7 @@ var password = process.env['BF_PASSWORD'] || "password";
 var betfairSport = require('../index.js');
 var session = betfairSport.newSession(login, password);
 betfairSport.setBetEmulationEnabled(true);
-//betfairSport.setXmlLoggingEnabled(true);
+betfairSport.setXmlLoggingEnabled(true);
 
 var marketId;
 var selectionId;
@@ -197,7 +197,7 @@ async.series({
             if (err) {
                 cb("Error in placeBets", null);
             }
-            //console.log(res.result);
+            console.log("###",res.result);
             if(res.result.betResults && res.result.betResults.length!=1)
                 cb("Error in placeBets", null);
             
