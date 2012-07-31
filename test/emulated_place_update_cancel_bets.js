@@ -187,7 +187,7 @@ async.series({
                 bspLiability: "0",
                 marketId: marketId,
                 price: "1.02",
-                selectionId: selectionId,
+                selectionId: selectionId+'1',
                 size: "5.00"
         };
         var inv = session.placeBets([bet1, bet2]);
