@@ -213,44 +213,6 @@ async.series({
         });
     },
 
-    // invoke updateBets to change size of previously placed bet
-    updateBets : function(cb) {
-        console.log('===== updateBets for betId=%s, change bet size =====',betId);
-        var bet = { 
-                betId: betId,
-                newBetPersistenceType: "IP",
-                newPrice : "1.01",
-                newSize : "5.0",
-                oldBetPersistenceType: "NONE",
-                oldPrice : "1.01",
-                oldSize : "5.0"
-                
-        }
-        var inv = session.updateBets([bet]);
-        inv.execute(function(err, res) {
-            console.log('action:', res.action, 'error:', err,
-                    'duration:', res.duration() / 1000);
-            if (err) {
-                cb("Error in updateBets", null);
-            }
-            console.log(res.result);
-            if(res.result.betResults && res.result.betResults.length!=1)
-                cb("Error in updateBets", null);
-            
-            var betResult = res.result.betResults[0];
-            console.log("updateBets results:") 
-            console.log("\tbetId=%s", betResult.betId);
-            console.log("\tnewPrice=%s", betResult.newPrice);
-            console.log("\tnewBetId=%s", betResult.newBetId);
-            console.log("\tnewSize=%s", betResult.newSize);
-            console.log("\tresultCode=%s", betResult.resultCode);
-            console.log("\tsizeCancelled=%s", betResult.sizeCancelled);
-            console.log("\tsuccess=%s", betResult.success);
-            
-            cb(null, "OK");
-        });
-    },
-
     // invoke cancelBets to cancel previously placed/updated bet
     cancelBets : function(cb) {
         console.log('===== cancelBets for betId=%s =====',betId);
