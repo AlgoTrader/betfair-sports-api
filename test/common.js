@@ -1,8 +1,14 @@
 // This module contains functions shared by multiple tests
 
-// Betfair session
-exports.session = null;
-exports.loginCookie = null;
+// session to use for all the invocations, should be set by test
+exports.session = null;         
+
+// cookie returned by the login invocation, pretty useless for most of cases
+exports.loginCookie = null;     
+
+// marketId used for tests, it is the most distant 'Match Odds' tennis event from now
+// the most distant match is a safe place for placing and canceling bets
+exports.marketId = null;
 
 // login to Betfair
 exports.login = function(cb) {

@@ -18,7 +18,7 @@ common.session = session;
 function sendSerialKeepAlives(cb) {
     console.log('===== Send %s serial keepAlive requests to the same cluster =====',
             keepAliveRequests);
-    console.log('cookie', session.loginCookie);
+    console.log('cookie', common.loginCookie);
     // send a single keepAlive request
     function sendRequest(cb2) {
         var keepAlive = session.keepAlive();
