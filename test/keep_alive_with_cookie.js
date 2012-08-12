@@ -22,7 +22,7 @@ function sendSerialKeepAlives(cb) {
     // send a single keepAlive request
     function sendRequest(cb2) {
         var keepAlive = session.keepAlive();
-        keepAlive.requestCookie = session.loginCookie;
+        keepAlive.requestCookie = common.loginCookie;
         keepAlive.execute(function(err, res) {
             console.log("keepAlive result:", res.isSuccess() ? 'OK' : 'Fail', 'cluster', res
                     .responseClusterId(), "duration", res.duration() / 1000);

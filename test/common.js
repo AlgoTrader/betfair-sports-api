@@ -2,6 +2,7 @@
 
 // Betfair session
 exports.session = null;
+exports.loginCookie = null;
 
 // login to Betfair
 exports.login = function(cb) {
@@ -13,7 +14,7 @@ exports.login = function(cb) {
         } else {
             console.log('Login OK');
         }
-        session.loginCookie = res.responseCookie;
+        exports.loginCookie = res.responseCookie;
         cb(err, res.result.errorCode);
     });
 }
