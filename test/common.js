@@ -45,6 +45,7 @@ exports.logout = function(cb) {
 // invoke getAllMArkets for tennis events
 exports.getAllMarkets = function(cb) {
     console.log('===== Get available tennis matches =====');
+    var session = exports.session;
 
     // eventTypeIds 1-soccer, 2-tennis
     var inv = session.getAllMarkets({
@@ -59,13 +60,21 @@ exports.getAllMarkets = function(cb) {
             return;
         }
         
+        //console.log(res.result.marketData);
         var filtered = res.result.marketData.filter(function(item) {
-            item.marketName == 'Match Odds';
+            return item.marketName === 'Match Odds';
         });
+        
         var sorted = filtered.sort(function(item1,item2) { 
             return item1.eventDate - item2.eventDate;
         });
         cb(null, sorted);
     });
+}
+
+// Select the distant market to play with
+exports.selectMarket = function(markets, cb) {
+    var len = markets.length;
+    cb(null, markets[len-1]);
 }
 
