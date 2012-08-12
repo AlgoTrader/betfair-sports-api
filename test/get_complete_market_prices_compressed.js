@@ -50,7 +50,6 @@ function getMarketPricesCompressed(market, cb) {
     });
 }
 
-
 // Run the test
 var testSteps = [
         common.login,
