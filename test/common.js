@@ -1,15 +1,16 @@
 // This module contains functions shared by multiple tests
 
 // session to use for all the invocations, should be set by test
-exports.session = null;         
+exports.session = null;
 
 // cookie returned by the login invocation, pretty useless for most of cases
-exports.loginCookie = null;   
+exports.loginCookie = null;
 
 // All the markets found by getAllMarkets
 exports.markets = [];
 
-// marketId used for tests, it is the most distant 'Match Odds' tennis event from now
+// marketId used for tests, it is the most distant 'Match Odds' tennis event
+// from now
 // the most distant match is a safe place for placing and canceling bets
 exports.marketId = null;
 
@@ -53,19 +54,19 @@ exports.getAllMarkets = function(cb) {
         locale : 'EN'
     });
     inv.execute(function(err, res) {
-        console.log('action:', res.action, 'error:', err, 'duration:', res
-                .duration() / 1000);
+        console.log('action:', res.action, 'error:', err, 'duration:', res.duration() / 1000);
         if (err) {
             cb(err);
             return;
         }
-        
-        //console.log(res.result.marketData);
+
+        // console.log(res.result.marketData);
         var filtered = res.result.marketData.filter(function(item) {
             return item.marketName === 'Match Odds';
         });
-        
-        var sorted = filtered.sort(function(item1,item2) { 
+        console.log('There are %d markets after filtering', filtered.length);
+
+        var sorted = filtered.sort(function(item1, item2) {
             return item1.eventDate - item2.eventDate;
         });
         cb(null, sorted);
@@ -75,6 +76,8 @@ exports.getAllMarkets = function(cb) {
 // Select the distant market to play with
 exports.selectMarket = function(markets, cb) {
     var len = markets.length;
-    cb(null, markets[len-1]);
+    var market = markets[len - 1];
+    console.log('Selected market "%s", "%s"', market.marketId, market.menuPath.replace(
+            /\\.*\\/, ''));
+    cb(null, markets[len - 1]);
 }
-
