@@ -7,6 +7,9 @@ var common = require('./common.js');
 var login = process.env['BF_LOGIN'] || "nobody";
 var password = process.env['BF_PASSWORD'] || "password";
 
+//Optional XML logging, used for debug purposes
+//betfair.setXmlLoggingEnabled(true);
+
 // Number of parallel keepAlive requests
 var keepAliveRequests = 20;
 

@@ -1,59 +1,59 @@
 var util = require('util');
 var async = require('async')
+var betfair = require('../index.js');
+var common = require('./common.js');
 
-//Betfair account data
+// Betfair account data
 var login = process.env['BF_LOGIN'] || "nobody";
 var password = process.env['BF_PASSWORD'] || "password";
 
-//Create session to Betfair
-var betfairSport = require('../index.js');
-var session = betfairSport.newSession(login, password);
-//betfairSport.setXmlLoggingEnabled(true);
+// Optional XML logging, used for debug purposes
+// betfair.setXmlLoggingEnabled(true);
 
-async.series({
-    // Login to Betfair
-    login : function(cb) {
-        console.log('===== Logging in to Betfair... =====');
-        session.open(function onLoginFinished(err, res) {
-            if (err) {
-                console.log('Login error', err);
-                process.exit(-1);
-            }
-            console.log('Logged in OK');
-            cb(null, "OK");
-        });
-    },
+// Number of parallel keepAlive requests
+var keepAliveRequests = 20;
 
-    // invoke getAccountFunds for exchanges
-    sendKeepAlives : function(cb) {
-        console.log('===== Send getAccountFunds request to both UK/Aus=====');
-        var gotUk = false;
-        var gotAus = false;
+// Create session to Betfair
+var session = betfair.newSession(login, password);
+common.session = session;
+
+// getAccountFunds invocation to UK and Aus exchanges
+// the only test that works with Aus exchange
+function getAccountFunds(cb) {
+    console.log('===== Send getAccountFunds request to both UK/Aus=====');
+
+    // UK exchange
+    function uk(cb2) {
         session.setCurrentExchange('uk');
-	var inv = session.getAccountFunds()
-	inv.execute(function(err,res) {
-	    console.log("UK balance:", res.result.balance);
-	    gotUk=true;
-	    if(gotUk && gotAus)
-	        cb(null);
-	});
-        session.setCurrentExchange('aus');
-	var inv = session.getAccountFunds()
-	inv.execute(function(err,res) {
-	    console.log("AUS balance:", res.result.balance);
-	    gotAus=true;
-	    if(gotUk && gotAus)
-	        cb(null);
-	});
-    },
-
-    //  Logout from Betfair
-    logout : function(cb) {
-        console.log('===== Logging out... =====');
-        session.close(function(err, res) {
-            console.log('Logged out OK');
-            process.exit(0);
+        var inv = session.getAccountFunds()
+        inv.execute(function(err, res) {
+            console.log("UK balance:", res.result.balance);
+            cb2(null);
         });
-        cb(null, "OK");
     }
+    // AUS Exchane
+    function aus(cb2) {
+        session.setCurrentExchange('aus');
+        var inv = session.getAccountFunds()
+        inv.execute(function(err, res) {
+            console.log("AU balance:", res.result.balance);
+            cb2(null);
+        });
+    }
+
+    async.parallel([ uk, aus ], cb);
+}
+
+// Run the test
+var testSteps = {
+    step1 : common.login,
+    step2 : getAccountFunds,
+    step3 : common.logout
+};
+async.series(testSteps, function(err, res) {
+    if (err)
+        console.log("===== TEST FAILED, error=%j =====", err);
+    else
+        console.log("===== TEST OK =====");
+    process.exit(0);
 });
