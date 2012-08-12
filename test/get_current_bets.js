@@ -29,6 +29,7 @@ function getCurrentBets(market, cb) {
         console.log( util.inspect(res.result, false, 10) );
         console.log("errorCode:", res.result.errorCode, 
                 "recCount", res.result.totalRecordCount );
+        
         // for(var record in res.result.bets) {
         // var bet = res.result.bets[record];
         // console.log( "\tbetId=%s betStatus=%s size=%s price=%s", bet.betId,
