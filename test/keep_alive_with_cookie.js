@@ -37,19 +37,19 @@ function sendSerialKeepAlives(cb) {
     var reqs = [];
     for ( var cnt = 0; cnt < keepAliveRequests; ++cnt)
         reqs.push(sendRequest);
-    async.series(reqs, cb);
+    async.series(reqs, function(err, res) {
+        cb(err);
+    });
 }
 
-// Run the test
-var testSteps = {
-    step1 : common.login,
-    step2 : sendSerialKeepAlives,
-    step3 : common.logout
-};
-async.series(testSteps, function(err, res) {
+//Run the test
+var testSteps = [ common.login, sendSerialKeepAlives, common.logout ];
+async.waterfall(testSteps, function(err, res) {
     if (err)
         console.log("===== TEST FAILED, error=%j =====", err);
     else
         console.log("===== TEST OK =====");
     process.exit(0);
 });
+
+

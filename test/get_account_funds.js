@@ -10,9 +10,6 @@ var password = process.env['BF_PASSWORD'] || "password";
 // Optional XML logging, used for debug purposes
 // betfair.setXmlLoggingEnabled(true);
 
-// Number of parallel keepAlive requests
-var keepAliveRequests = 20;
-
 // Create session to Betfair
 var session = betfair.newSession(login, password);
 common.session = session;
@@ -41,16 +38,14 @@ function getAccountFunds(cb) {
         });
     }
 
-    async.parallel([ uk, aus ], cb);
+    async.parallel([ uk, aus ], function(err,res) {
+        cb(err);
+    });
 }
 
-// Run the test
-var testSteps = {
-    step1 : common.login,
-    step2 : getAccountFunds,
-    step3 : common.logout
-};
-async.series(testSteps, function(err, res) {
+//Run the test
+var testSteps = [ common.login, getAccountFunds, common.logout ];
+async.waterfall(testSteps, function(err, res) {
     if (err)
         console.log("===== TEST FAILED, error=%j =====", err);
     else

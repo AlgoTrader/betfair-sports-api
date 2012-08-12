@@ -4,7 +4,10 @@
 exports.session = null;         
 
 // cookie returned by the login invocation, pretty useless for most of cases
-exports.loginCookie = null;     
+exports.loginCookie = null;   
+
+// All the markets found by getAllMarkets
+exports.markets = [];
 
 // marketId used for tests, it is the most distant 'Match Odds' tennis event from now
 // the most distant match is a safe place for placing and canceling bets
@@ -21,7 +24,7 @@ exports.login = function(cb) {
             console.log('Login OK');
         }
         exports.loginCookie = res.responseCookie;
-        cb(err, res.result.errorCode);
+        cb(err);
     });
 }
 
@@ -35,6 +38,34 @@ exports.logout = function(cb) {
         } else {
             console.log('Logout OK');
         }
-        cb(err, res.result.errorCode);
+        cb(err);
     });
 }
+
+// invoke getAllMArkets for tennis events
+exports.getAllMarkets = function(cb) {
+    console.log('===== Get available tennis matches =====');
+
+    // eventTypeIds 1-soccer, 2-tennis
+    var inv = session.getAllMarkets({
+        eventTypeIds : [ 2 ],
+        locale : 'EN'
+    });
+    inv.execute(function(err, res) {
+        console.log('action:', res.action, 'error:', err, 'duration:', res
+                .duration() / 1000);
+        if (err) {
+            cb(err);
+            return;
+        }
+        
+        var filtered = res.result.marketData.filter(function(item) {
+            item.marketName == 'Match Odds';
+        });
+        var sorted = filtered.sort(function(item1,item2) { 
+            return item1.eventDate - item2.eventDate;
+        });
+        cb(null, sorted);
+    });
+}
+

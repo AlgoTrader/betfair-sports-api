@@ -18,7 +18,7 @@ var session = betfair.newSession(login, password);
 common.session = session;
 
 // Send a number of parallel keepAlive requests
-function sendSerialKeepAlives(cb) {
+function sendParallelKeepAlives(cb) {
     console.log('===== Send %s serial keepAlive requests =====', keepAliveRequests);
 
     // send a single keepAlive request
@@ -35,19 +35,18 @@ function sendSerialKeepAlives(cb) {
     var reqs = [];
     for ( var cnt = 0; cnt < keepAliveRequests; ++cnt)
         reqs.push(sendRequest);
-    async.parallel(reqs, cb);
+    async.parallel(reqs, function(err, res) {
+        cb(err);
+    });
 }
 
-// Run the test
-var testSteps = {
-    step1 : common.login,
-    step2 : sendSerialKeepAlives,
-    step3 : common.logout
-};
-async.series(testSteps, function(err, res) {
+//Run the test
+var testSteps = [ common.login, sendParallelKeepAlives, common.logout ];
+async.waterfall(testSteps, function(err, res) {
     if (err)
         console.log("===== TEST FAILED, error=%j =====", err);
     else
         console.log("===== TEST OK =====");
     process.exit(0);
 });
+

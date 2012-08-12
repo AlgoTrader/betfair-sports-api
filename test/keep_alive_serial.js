@@ -7,8 +7,8 @@ var common = require('./common.js');
 var login = process.env['BF_LOGIN'] || "nobody";
 var password = process.env['BF_PASSWORD'] || "password";
 
-//Optional XML logging, used for debug purposes
-//betfair.setXmlLoggingEnabled(true);
+// Optional XML logging, used for debug purposes
+// betfair.setXmlLoggingEnabled(true);
 
 // Number of parallel keepAlive requests
 var keepAliveRequests = 20;
@@ -34,16 +34,14 @@ function sendSerialKeepAlives(cb) {
     var reqs = [];
     for ( var cnt = 0; cnt < keepAliveRequests; ++cnt)
         reqs.push(sendRequest);
-    async.series(reqs, cb);
+    async.series(reqs, function(err, res) {
+        cb(err);
+    });
 }
 
 // Run the test
-var testSteps = {
-    step1 : common.login,
-    step2 : sendSerialKeepAlives,
-    step3 : common.logout
-};
-async.series(testSteps, function(err, res) {
+var testSteps = [ common.login, sendSerialKeepAlives, common.logout ];
+async.waterfall(testSteps, function(err, res) {
     if (err)
         console.log("===== TEST FAILED, error=%j =====", err);
     else
