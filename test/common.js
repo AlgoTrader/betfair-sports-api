@@ -15,7 +15,11 @@ exports.markets = [];
 exports.marketId = null;
 
 // login to Betfair
-exports.login = function(cb) {
+exports.login = function(par, cb) {
+    if(!cb)
+        // cb is first parameter
+        cb = par; 
+
     console.log('===== Logging in to Betfair =====');
     var session = exports.session;
     session.open(function(err, res) {
@@ -30,7 +34,11 @@ exports.login = function(cb) {
 }
 
 // logout from Betfair
-exports.logout = function(cb) {
+exports.logout = function(par, cb) {
+    if(!cb)
+        // cb is first parameter
+        cb = par; 
+    
     console.log('===== Logging out... =====');
     var session = exports.session;
     session.close(function(err, res) {
@@ -66,23 +74,28 @@ exports.getAllMarkets = function(cb) {
         });
         console.log('There are %d markets after filtering', filtered.length);
 
-        var sorted = filtered.sort(function(item1, item2) {
+        var sortedMarkets = filtered.sort(function(item1, item2) {
             return item1.eventDate - item2.eventDate;
         });
-        cb(null, sorted);
+        cb(null, { markets: sortedMarkets} );
     });
 }
 
 // Select the distant market to play with
-exports.selectMarket = function(markets, cb) {
+exports.selectMarket = function(data, cb) {
+    var markets = data.markets;
     var len = markets.length;
     var market = markets[len - 1];
     console.log('Selected market "%s", "%s"', market.marketId, market.menuPath.replace(
             /\\.*\\/, ''));
-    cb(null, markets[len - 1]);
+    data.market = market;
+    cb(null, data);
 }
 
-exports.emulatorGetCompleteMarketPrices = function(mark, cb) {
+// Emulator helper
+// Refresh prices to update emulator state
+exports.emulatorGetCompleteMarketPrices = function(data, cb) {
+    var mark = data.market;
     console.log('===== Call getCompleteMarketPricesCompressed for marketId="%s" =====',
             mark.marketId);
     var session = exports.session;
@@ -117,6 +130,35 @@ exports.emulatorGetCompleteMarketPrices = function(mark, cb) {
                         price.price, price.backAmount, price.layAmount);
             }
         }
-        cb(null, desc);
+        data.desc = desc;
+        cb(null, data);
+    });
+}
+
+//Emulator helper
+//GetMUBets
+function emulatorGetMUBets(data, cb)
+{
+    var mark = data.market;
+    console.log('===== Call getMUBets for marketId="%s" =====', mark.marketId);
+    var inv = session.getMUBets("MU", "PLACED_DATE", 200, "ASC", 0, {marketId:mark.marketId});
+    inv.execute(function(err, res) {
+        console.log('action:', res.action, 'error:', err, 'duration:', res
+                .duration() / 1000);
+        if (err) {
+            cb(err);
+            return;
+        }
+        
+        console.log( util.inspect(res.result, false, 10) );
+        console.log("errorCode:", res.result.errorCode, 
+                "recCount", res.result.totalRecordCount );
+        
+        for(var record in res.result.bets) {
+            var bet = res.result.bets[record];
+            console.log( "\tbetId=%s betStatus=%s size=%s price=%s",  bet.betId, bet.betStatus, bet.size, bet.price);
+        }
+            
+        cb(null);
     });
 }

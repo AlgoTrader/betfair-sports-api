@@ -16,7 +16,8 @@ var session = betfair.newSession(login, password);
 common.session = session;
 
 // invoke getCompleteMarketPircesCompressed on the single market
-function getMarketPricesCompressed(market, cb) {
+function getMarketPricesCompressed(data, cb) {
+    var market = data.market;
     console.log('===== Call getCompleteMarketPricesCompressed for marketId="%s" =====',
             market.marketId);
     var inv = session.getCompleteMarketPricesCompressed(market.marketId);

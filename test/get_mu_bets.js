@@ -18,8 +18,9 @@ common.session = session;
 // BetfairSession.prototype.getMUBets = function(betStatus, orderBy, count,
 // sortOrder, startRecord, optional) { // invoke getMUBets on the single
 // market
-function getMUBets(market, cb)
+function getMUBets(data, cb)
 {
+    var market = data.market;
     console.log('===== Call getMUBets for marketId="%s" =====', market.marketId);
     var inv = session.getMUBets("MU", "PLACED_DATE", 200, "ASC", 0, {marketId:market.marketId});
     inv.execute(function(err, res) {

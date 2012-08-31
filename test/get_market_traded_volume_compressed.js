@@ -16,7 +16,8 @@ var session = betfair.newSession(login, password);
 common.session = session;
 
 // invoke getMarketTradedVolumeCompressed on the single market
-function getMarketTradedVolumeCompressed(market, cb) {
+function getMarketTradedVolumeCompressed(data, cb) {
+    var market = data.market;
     console.log('===== Call getMarketTradedVolumeCompressed for marketId="%s" =====',
             market.marketId);
     var inv = session.getMarketTradedVolumeCompressed(market.marketId);

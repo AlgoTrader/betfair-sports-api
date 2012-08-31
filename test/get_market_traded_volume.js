@@ -16,7 +16,8 @@ var session = betfair.newSession(login, password);
 common.session = session;
 
 // invoke getMarketProfitAndLoss on the single market
-function getMarketProfitAndLoss(market, cb) {
+function getMarketProfitAndLoss(data, cb) {
+    var market = data.market;
     console.log('===== Call getMarketProfitAndLoss for marketId="%s" =====',
             market.marketId);
     var inv = session.getMarketProfitAndLoss(market.marketId, false);
@@ -28,7 +29,7 @@ function getMarketProfitAndLoss(market, cb) {
             return
         }
         // console.log(util.inspect(res.result, false, 10));
-        var mark = { marketId: market.marketId };
+        var desc = { marketId: market.marketId };
         for(var playerIndex in res.result.annotations) {
                 var playerInfo = res.result.annotations[playerIndex];
                 console.log("Player %s", playerIndex);
@@ -37,16 +38,18 @@ function getMarketProfitAndLoss(market, cb) {
                 console.log('\tIfWin:%s', playerInfo.ifWin);
                 console.log('\tIfLoss:%s', playerInfo.ifLoss);
                 if(playerIndex==0)
-                    mark.selectionId = playerInfo.selectionId;
+                    desc.selectionId = playerInfo.selectionId;
         }
+        data.desc = desc;
 
-        cb(null, mark);
+        cb(null, data);
     });
 }
 
 
 // invoke getMarketTradedVolume on the single market
-function getMarketTradedVolume(desc, cb) {
+function getMarketTradedVolume(data, cb) {
+    desc = data.desc;
     console.log('===== Call getMarketTradedVolume for marketId="%s", selectionId="%s" =====',
             desc.marketId, desc.selectionId);
     var inv = session.getMarketTradedVolume(desc.marketId, desc.selectionId);

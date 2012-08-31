@@ -17,7 +17,8 @@ common.session = session;
 
 // getAccountFunds invocation to UK and Aus exchanges
 // the only test that works with Aus exchange
-function processMarkets(markets, cb) {
+function processMarkets(data, cb) {
+    var markets = data.markets;
     console.log('===== Process List of %d Markets... =====', markets.length);
     for ( var index in markets) {
         market = markets[index];

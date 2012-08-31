@@ -16,7 +16,8 @@ var session = betfair.newSession(login, password);
 common.session = session;
 
 // invoke getMarket on the single market
-function getMarket(market, cb) {
+function getMarket(data, cb) {
+    var market = data.market;
     console.log('===== Call getMarket for marketId="%s" =====', market.marketId);
     var inv = session.getMarket(market.marketId);
     inv.execute(function(err, res) {

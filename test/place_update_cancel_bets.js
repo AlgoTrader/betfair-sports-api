@@ -16,7 +16,8 @@ var session = betfair.newSession(login, password);
 common.session = session;
 
 // invoke getMarketPircesCompressed on the single market
-function getMarketPricesCompressed(mark, cb) {
+function getMarketPricesCompressed(data, cb) {
+    var mark = data.market;
     console.log('===== Call getMarketPricesCompressed for marketId="%s" =====',
             mark.marketId);
     var inv = session.getMarketPricesCompressed(mark.marketId);
@@ -56,13 +57,15 @@ function getMarketPricesCompressed(mark, cb) {
                 console.log("\t lay price:%s amount:%s", item.price, item.amount);
             }
         }
-        cb(null, desc);
+        data.desc = desc;
+        cb(null, data);
     });
 }
 
 // invoke placeBets to place LAY 5.0 for player1 at 1.01
 // maximum loss if matched is 0.05
-function placeBets(desc, cb) {
+function placeBets(data, cb) {
+    var desc = data.desc;
     console.log('===== Place a test lay bet marketId=%s selectionId=%s =====',
             desc.marketId, desc.selectionId);
     var bet = {
@@ -99,12 +102,14 @@ function placeBets(desc, cb) {
             betIds.push(betResult.betId);
         }
 
-        cb(null, betIds);
+        data.betIds = betIds;
+        cb(null, data);
     });
 }
 
 // invoke updateBets to change size of previously placed bet
-function updateBets(betIds, cb) {
+function updateBets(data, cb) {
+    var betIds = data.betIds;
     console.log('===== updateBets for %d bets =====', betIds.length);
     // For first bet, change persistence
     var bet1 = {
@@ -149,12 +154,13 @@ function updateBets(betIds, cb) {
             console.log("\tsuccess=%s", betResult.success);
         }
 
-        cb(null, betIds);
+        cb(null, data);
     });
 }
 
 // invoke cancelBets to cancel previously placed/updated bet
-function cancelBets(betIds, cb) {
+function cancelBets(data, cb) {
+    var betIds = data.betIds;
     console.log('===== cancelBets for %d bets =====', betIds.length);
     var bets = [];
     for ( var i = 0; i < betIds.length; ++i)

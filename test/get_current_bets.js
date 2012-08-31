@@ -16,7 +16,8 @@ var session = betfair.newSession(login, password);
 common.session = session;
 
 // invoke getCompleteMarketPircesCompressed on the single market
-function getCurrentBets(market, cb) {
+function getCurrentBets(data, cb) {
+    var market = data.market;
     console.log('===== Call getCurrentBets for marketId="%s" =====', market.marketId);
     var inv = session.getCurrentBets("U", true, "PLACED_DATE", 200, 0, false, {marketId:market.marketId});
     inv.execute(function(err, res) {
