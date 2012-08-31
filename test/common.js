@@ -1,18 +1,11 @@
 // This module contains functions shared by multiple tests
+var util = require('util');
 
 // session to use for all the invocations, should be set by test
 exports.session = null;
 
 // cookie returned by the login invocation, pretty useless for most of cases
 exports.loginCookie = null;
-
-// All the markets found by getAllMarkets
-exports.markets = [];
-
-// marketId used for tests, it is the most distant 'Match Odds' tennis event
-// from now
-// the most distant match is a safe place for placing and canceling bets
-exports.marketId = null;
 
 // login to Betfair
 exports.login = function(par, cb) {
@@ -52,7 +45,11 @@ exports.logout = function(par, cb) {
 }
 
 // invoke getAllMArkets for tennis events
-exports.getAllMarkets = function(cb) {
+exports.getAllMarkets = function(par, cb) {
+    if(!cb)
+        // cb is first parameter
+        cb = par; 
+
     console.log('===== Get available tennis matches =====');
     var session = exports.session;
 
@@ -137,10 +134,12 @@ exports.emulatorGetCompleteMarketPrices = function(data, cb) {
 
 //Emulator helper
 //GetMUBets
-function emulatorGetMUBets(data, cb)
+exports.emulatorGetMUBets = function (data, cb)
 {
     var mark = data.market;
     console.log('===== Call getMUBets for marketId="%s" =====', mark.marketId);
+    
+    var session = exports.session;
     var inv = session.getMUBets("MU", "PLACED_DATE", 200, "ASC", 0, {marketId:mark.marketId});
     inv.execute(function(err, res) {
         console.log('action:', res.action, 'error:', err, 'duration:', res
@@ -159,6 +158,6 @@ function emulatorGetMUBets(data, cb)
             console.log( "\tbetId=%s betStatus=%s size=%s price=%s",  bet.betId, bet.betStatus, bet.size, bet.price);
         }
             
-        cb(null);
+        cb(null, data);
     });
 }
