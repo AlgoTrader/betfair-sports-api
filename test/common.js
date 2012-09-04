@@ -161,3 +161,26 @@ exports.emulatorGetMUBets = function (data, cb)
         cb(null, data);
     });
 }
+
+//GetMarketProfitAndLoss
+exports.emulatorGetMarketProfitAndLoss = function (data, cb)
+{
+    var mark = data.market;
+    console.log('===== Call getMarketProfitAndLoss for marketId="%s" =====', mark.marketId);
+    
+    var session = exports.session;
+    var inv = session.getMarketProfitAndLoss(mark.marketId, false);
+    inv.execute(function(err, res) {
+        console.log('action:', res.action, 'error:', err, 'duration:', res
+                .duration() / 1000);
+        if (err) {
+            cb(err);
+            return;
+        }
+        
+        console.log( util.inspect(res.result, false, 10) );
+        console.log("errorCode:", res.result.errorCode);
+        
+        cb(null, data);
+    });
+}

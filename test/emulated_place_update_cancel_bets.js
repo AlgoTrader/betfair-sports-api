@@ -149,7 +149,7 @@ function cancelBets(data, cb) {
 
 // Run the test
 var testSteps = [ common.login, common.getAllMarkets, common.selectMarket,
-        common.emulatorGetCompleteMarketPrices, placeBets, common.emulatorGetMUBets,
+        common.emulatorGetCompleteMarketPrices, placeBets, common.emulatorGetMUBets, common.emulatorGetMarketProfitAndLoss,
         cancelBets, common.emulatorGetMUBets, common.logout ];
 async.waterfall(testSteps, function(err, res) {
     if (err)
