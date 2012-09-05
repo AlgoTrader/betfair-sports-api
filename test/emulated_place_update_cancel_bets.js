@@ -29,12 +29,23 @@ function placeBets(data, cb) {
         betType : "L",
         bspLiability : "0",
         marketId : desc.marketId,
-        price : "1.01",
+        price : "6.0",
         selectionId : desc.selectionId,
-        size : "5.00"
+        size : "100.00"
+    }
+    var bet2 = {
+        asianLineId : "0",
+        betCategoryType : "E",
+        betPersistenceType : "NONE",
+        betType : "L",
+        bspLiability : "0",
+        marketId : desc.marketId,
+        price : "6.0",
+        selectionId : desc.selectionId,
+        size : "200.00"
     }
     // add two bets
-    var inv = session.placeBets([ bet, bet ]);
+    var inv = session.placeBets([ bet, bet2 ]);
     inv.execute(function(err, res) {
         console.log('action:', res.action, 'error:', err, 'duration:',
                 res.duration() / 1000);
