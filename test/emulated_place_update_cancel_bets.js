@@ -31,7 +31,7 @@ function placeBets(data, cb) {
         marketId : desc.marketId,
         price : "6.0",
         selectionId : desc.selectionId,
-        size : "100.00"
+        size : "1000.00"
     }
     var bet2 = {
         asianLineId : "0",
@@ -42,7 +42,7 @@ function placeBets(data, cb) {
         marketId : desc.marketId,
         price : "6.0",
         selectionId : desc.selectionId,
-        size : "200.00"
+        size : "5000.00"
     }
     // add two bets
     var inv = session.placeBets([ bet, bet2 ]);

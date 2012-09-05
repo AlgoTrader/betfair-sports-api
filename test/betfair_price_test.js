@@ -42,7 +42,7 @@ var cnt = 0;
 var price = newBetfairPrice(1.01);
 while(true) {
     console.log('index:%s price:%s',cnt,price.toString());
-    if(price.toString()==='1000')
+    if(price.toString()==='1000.0')
         break;
     price.increasePrice();
     ++cnt;
