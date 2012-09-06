@@ -162,6 +162,36 @@ exports.emulatorGetMUBets = function (data, cb)
     });
 }
 
+//Emulator helper
+//GetCurrentBets
+exports.emulatorGetCurrentBets = function (data, cb)
+{
+    var mark = data.market;
+    console.log('===== Call getCurrentBets for marketId="%s" =====', mark.marketId);
+    
+    var session = exports.session;
+    var inv = session.getCurrentBets("M", true, "PLACED_DATE", 200, 0, false, {marketId:mark.marketId});
+    inv.execute(function(err, res) {
+        console.log('action:', res.action, 'error:', err, 'duration:', res
+                .duration() / 1000);
+        if (err) {
+            cb(err);
+            return;
+        }
+        
+        console.log( util.inspect(res.result, false, 10) );
+        console.log("errorCode:", res.result.errorCode, 
+                "recCount", res.result.totalRecordCount );
+        
+        for(var record in res.result.bets) {
+            var bet = res.result.bets[record];
+            console.log( "\tbetId=%s betStatus=%s size=%s price=%s",  bet.betId, bet.betStatus, bet.size, bet.price);
+        }
+            
+        cb(null, data);
+    });
+}
+
 //GetMarketProfitAndLoss
 exports.emulatorGetMarketProfitAndLoss = function (data, cb)
 {
