@@ -2,7 +2,7 @@
   "author": "Anton Zemlyanov <anton.zem at google mail>",
   "name": "betfair-sports-api",
   "description": "Betfair Sports API for Node",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "repository": {
     "url": "https://github.com/AlgoTrader/betfair-sports-api"
   },
