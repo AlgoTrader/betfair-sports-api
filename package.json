@@ -8,7 +8,7 @@
   },
   "keywords" : ["betfair"],
   "main": "index.js",
-  "dependencies": { "async" : "*", "xml-writer" : "*", "easysax" : "*", "cookie" : "*" },
+  "dependencies": { "async" : "*", "xml-writer" : "*", "easysax" : "*", "cookie" : "*", "bunyan":"*" },
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {

@@ -27,7 +27,7 @@ exports.setXmlLoggingEnabled = function(flag) {
     betfairInvocation.isXmlLoggingEnabled = flag;
 }
 
-var betfairInvocationHistory = require('./lib/betfair_invocation_history');
-exports.getInvocationHistory = betfairInvocationHistory.getInvocationHistory;
+var betfairInvocationLog = require('./lib/betfair_invocation_log');
+exports.getInvocationHistory = betfairInvocationLog.getInvocationHistory;
 
 
