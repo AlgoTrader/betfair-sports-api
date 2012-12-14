@@ -4,11 +4,18 @@
 
     npm install betfair-sports-api
 
+## Important Notice ##
+ 
+Betfair is about to switch to a next generation JSON based API. It is certainly good news as JSON 
+is a native JavaScript format. Let's say goodbye to SOAP, XML generation/parsing, huge network traffic 
+and many complexities of the old SOAP API. The current project is production-ready, but I would not 
+recommend use it for new projects. **The development of the betfair-sport-api is stopped**. There is 
+a new library for the new API, although it is not usable yet.
+
 ## Tutorial ##
 
 There is the **[Betfair Sports API for Node.js Tutorial](https://github.com/AlgoTrader/betfair-sports-api/wiki)**
 that provides quick and easy start with the library. No Node.js and minimal JavaScript knowledge is required.
-**Please note that the tutorial is not finished yet, but is still very good for start.**
 
 ## Synopsis ##
 
