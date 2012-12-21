@@ -10,7 +10,7 @@ Betfair is about to switch to a next generation JSON based API. It is certainly 
 is a native JavaScript format. Let's say goodbye to SOAP, XML generation/parsing, huge network traffic 
 and many complexities of the old SOAP API. The current project is production-ready, but I would not 
 recommend use it for new projects. **The development of the betfair-sport-api is stopped**. There is 
-a new library for the new API, although it is not usable yet.
+a new library for the new API https://github.com/AlgoTrader/betfair.
 
 ## Tutorial ##
 
