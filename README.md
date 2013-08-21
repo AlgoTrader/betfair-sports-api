@@ -7,7 +7,7 @@
 ## Important Notice ##
  
 Betfair new NG API is in production now. The current SOAP API is obsoloete. **The development of the betfair-sport-api is stopped**. There is 
-a new library for the Betfair NG API https://github.com/AlgoTrader/betfair.
+a new library for the Betfair NG API https://github.com/AlgoTrader/betfair. ** DO NOT USE THIS LIBRARY UNLESS YOU AWARE WHAT YOU DO **
 
 ## Tutorial ##
 
